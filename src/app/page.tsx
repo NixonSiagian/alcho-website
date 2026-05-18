@@ -287,7 +287,7 @@ export default function HomePage() {
                 Shop the Collection
                 <ArrowRight className="w-4 h-4 transition-transform duration-400 ease-luxury group-hover:translate-x-1.5" />
               </Link>
-              <Link href="/contact" className="btn-ghost-elevated">
+              <Link href="/contact" className="btn-ghost-elevated group">
                 Speak with Us
                 <ArrowUpRight className="w-3.5 h-3.5 opacity-60 transition-all duration-400 ease-luxury group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
