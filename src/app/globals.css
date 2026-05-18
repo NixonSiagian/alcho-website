@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,8 +8,6 @@
   :root {
     --foreground: #2e1d0e;
     --background: #fdfaf3;
-    --gold: #e1a82b;
-    --gold-deep: #a86c15;
   }
 
   .dark {
@@ -17,35 +15,22 @@
     --background: #1a0f06;
   }
 
-  * {
-    @apply box-border;
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-cream-50 dark:bg-brown-950 text-brown-900 dark:text-cream-100;
     font-family: 'Inter', system-ui, sans-serif;
-    font-feature-settings: "ss01", "cv11";
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', Georgia, serif;
-    letter-spacing: -0.01em;
   }
 
-  /* Image/text rendering polish */
-  img {
-    @apply select-none;
-  }
-
-  /* Honor user's reduced motion preference globally */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -57,49 +42,29 @@
 }
 
 @layer components {
-  /* ═══════════════════════════════════════════
-     PREMIUM BUTTONS
-  ═══════════════════════════════════════════ */
-
-  /* Gold gradient CTA — the signature premium button */
+  /* Primary gold CTA button */
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-brown-950 transition-all duration-400 ease-luxury overflow-hidden;
+    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-brown-950 transition-all duration-400 ease-luxury;
     background-image: linear-gradient(135deg, #f5d97a 0%, #e1a82b 50%, #a86c15 100%);
-    box-shadow:
-      0 10px 30px -10px rgba(225, 168, 43, 0.45),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
-  }
-  .btn-gold::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 24px -8px rgba(225, 168, 43, 0.4);
   }
   .btn-gold:hover {
     transform: translateY(-2px);
-    box-shadow:
-      0 18px 40px -12px rgba(225, 168, 43, 0.6),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
-  }
-  .btn-gold:hover::before {
-    opacity: 1;
+    box-shadow: 0 14px 32px -8px rgba(225, 168, 43, 0.55);
   }
 
-  /* Ghost outline button — dark surfaces */
+  /* Ghost button for dark backgrounds */
   .btn-ghost-light {
-    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-cream-100 border border-cream-100/25 transition-all duration-400 ease-luxury;
-    backdrop-filter: blur(2px);
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-cream-100 border border-cream-100/25 transition-all duration-400 ease-luxury;
   }
   .btn-ghost-light:hover {
     @apply border-gold-300/60 bg-cream-50/5;
     transform: translateY(-1px);
   }
 
-  /* Ghost outline button — light surfaces */
+  /* Ghost button for light backgrounds */
   .btn-ghost-dark {
-    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-brown-900 border border-brown-200 transition-all duration-400 ease-luxury;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-brown-900 border border-brown-200 transition-all duration-400 ease-luxury;
   }
   .btn-ghost-dark:hover {
     @apply border-gold-400/60 bg-brown-100/40;
@@ -112,9 +77,7 @@
     text-wrap: balance;
   }
 
-  /* ═══════════════════════════════════════════
-     GOLD GRADIENT TEXT — elegant accent
-  ═══════════════════════════════════════════ */
+  /* Gold gradient text */
   .text-gold-gradient {
     background: linear-gradient(135deg, #f5d97a 0%, #e1a82b 50%, #a86c15 100%);
     -webkit-background-clip: text;
@@ -122,82 +85,13 @@
     background-clip: text;
   }
 
-  .text-cream-gradient {
-    background: linear-gradient(180deg, #fdfaf3 0%, #f5d97a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* ═══════════════════════════════════════════
-     CINEMATIC EFFECTS
-  ═══════════════════════════════════════════ */
-
-  /* Gold shimmer animation for special elements */
-  .gold-shimmer {
-    background: linear-gradient(90deg, transparent 0%, rgba(225, 168, 43, 0.25) 50%, transparent 100%);
-    background-size: 200% 100%;
-    animation: shimmer 3s infinite;
-  }
-
-  /* Hairline gold divider */
+  /* Gold hairline divider */
   .divider-gold {
     height: 1px;
     background: linear-gradient(90deg, transparent 0%, rgba(225, 168, 43, 0.5) 50%, transparent 100%);
   }
 
-  /* Subtle film grain on dark sections — cinematic texture */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: overlay;
-  }
-
-  /* Cinematic lighting — subtle radial glow */
-  .cinematic-glow {
-    position: relative;
-  }
-  .cinematic-glow::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 60%;
-    background: radial-gradient(ellipse, rgba(225, 168, 43, 0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  /* Premium card glow on hover */
-  .card-glow {
-    position: relative;
-  }
-  .card-glow::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    background: radial-gradient(
-      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(225, 168, 43, 0.06),
-      transparent 40%
-    );
-    pointer-events: none;
-  }
-  .card-glow:hover::after {
-    opacity: 1;
-  }
-
-  /* ═══════════════════════════════════════════
-     LINE CLAMP UTILITIES
-  ═══════════════════════════════════════════ */
+  /* Line clamp */
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
@@ -212,46 +106,16 @@
     -webkit-line-clamp: 3;
   }
 
-  /* ═══════════════════════════════════════════
-     PERFORMANCE UTILITIES
-  ═══════════════════════════════════════════ */
-
-  /* Hide scrollbars for horizontally-scrolling pill rows on mobile */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Smooth GPU-accelerated transforms (helps parallax stay buttery) */
+  /* GPU acceleration for parallax */
   .gpu {
     transform: translateZ(0);
-    backface-visibility: hidden;
     will-change: transform;
   }
-
-  /* Prevent content from causing horizontal overflow during animation */
-  .contain-paint {
-    contain: paint;
-  }
 }
 
-/* ═══════════════════════════════════════════
-   KEYFRAME ANIMATIONS
-═══════════════════════════════════════════ */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* ═══════════════════════════════════════════
-   SCROLLBAR STYLING — premium warm tones
-═══════════════════════════════════════════ */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
-  height: 6px;
 }
 ::-webkit-scrollbar-track {
   @apply bg-cream-100 dark:bg-brown-950;
@@ -260,19 +124,13 @@
   background: linear-gradient(180deg, #c98a1c 0%, #855420 100%);
   border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #e1a82b 0%, #a86c15 100%);
-}
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: #a86c15 transparent;
 }
 
-/* ═══════════════════════════════════════════
-   SELECTION COLOR — gold accent
-═══════════════════════════════════════════ */
+/* Selection */
 ::selection {
   background: rgba(225, 168, 43, 0.3);
   color: #2e1d0e;
@@ -280,14 +138,4 @@
 .dark ::selection {
   background: rgba(225, 168, 43, 0.4);
   color: #faf3e3;
-}
-
-/* ═══════════════════════════════════════════
-   SMOOTH SCROLL PERFORMANCE
-   Use passive scroll listeners for parallax
-═══════════════════════════════════════════ */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
 }
