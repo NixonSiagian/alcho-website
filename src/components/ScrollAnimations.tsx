@@ -8,7 +8,8 @@ import { useShouldReduceParallax } from "@/hooks/useResponsive";
    SCROLL ANIMATIONS — Minimal, Elegant Reveal System
    - Only fade + translateY (no blur, no scale, no heavy effects)
    - Respects reduced motion
-   - Reduced intensity on mobile (max 20px translate)
+   - Reduced intensity on mobile (max 16px translate)
+   - Uses only transform + opacity for 60fps performance
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─── ScrollReveal ─── */
@@ -26,15 +27,15 @@ export function ScrollReveal({
   children,
   className,
   direction = "up",
-  distance = 30,
+  distance = 24,
   delay = 0,
-  duration = 0.7,
+  duration = 0.75,
   once = true,
 }: ScrollRevealProps) {
   const reduce = useShouldReduceParallax();
 
-  // Mobile: reduce distance to max 20px for smooth performance
-  const effectiveDistance = reduce ? Math.min(distance, 20) : distance;
+  // Mobile: reduce distance to max 16px for smooth performance
+  const effectiveDistance = reduce ? Math.min(distance, 16) : distance;
   const effectiveDuration = reduce ? 0.4 : duration;
 
   const dirMap = {
@@ -50,7 +51,7 @@ export function ScrollReveal({
     <motion.div
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, margin: "-60px" }}
+      viewport={{ once, margin: "-80px" }}
       transition={{ duration: effectiveDuration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
@@ -70,14 +71,14 @@ interface StaggerChildrenProps {
 export function StaggerChildren({
   children,
   className,
-  stagger = 0.08,
-  delay = 0.1,
+  stagger = 0.07,
+  delay = 0.08,
 }: StaggerChildrenProps) {
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-80px" }}
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -93,7 +94,7 @@ export function StaggerChildren({
 }
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
@@ -109,15 +110,15 @@ interface FadeInProps {
   y?: number;
 }
 
-export function FadeIn({ children, className, delay = 0, y = 20 }: FadeInProps) {
+export function FadeIn({ children, className, delay = 0, y = 16 }: FadeInProps) {
   const reduce = useShouldReduceParallax();
-  const dist = reduce ? Math.min(y, 12) : y;
+  const dist = reduce ? Math.min(y, 10) : y;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: dist }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: reduce ? 0.35 : 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >

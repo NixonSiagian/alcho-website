@@ -54,7 +54,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-brand-dark text-cream-100 font-sans">
+      <body className="bg-brand-dark text-cream-100 font-sans antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />

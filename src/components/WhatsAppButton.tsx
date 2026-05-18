@@ -4,6 +4,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
 
+/* ═══════════════════════════════════════════════════════════════
+   WHATSAPP BUTTON — Refined, Non-Intrusive
+   - Softer ping animation
+   - Cleaner tooltip design
+   - Better mobile touch target
+   ═══════════════════════════════════════════════════════════════ */
+
 export default function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -14,29 +21,29 @@ export default function WhatsAppButton() {
   const waLink = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
-    <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex flex-col items-end gap-3">
       <AnimatePresence>
         {showTooltip && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="bg-brand-deeper rounded-2xl shadow-luxury p-4 max-w-xs border border-brown-800/40"
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-brand-deeper rounded-2xl shadow-luxury p-4 max-w-[260px] border border-brown-800/30"
           >
             <div className="flex items-start justify-between gap-3 mb-3">
               <div>
                 <p className="font-serif text-base font-semibold text-cream-100">
                   Speak with us
                 </p>
-                <p className="text-brown-400 text-xs mt-0.5 leading-relaxed">
+                <p className="text-brown-400 text-xs mt-1 leading-relaxed">
                   Our team typically replies within minutes.
                 </p>
               </div>
               <button
                 onClick={() => setShowTooltip(false)}
                 aria-label="Dismiss"
-                className="text-brown-500 hover:text-cream-100 transition-colors"
+                className="text-brown-500 hover:text-cream-100 transition-colors duration-300 p-1"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -58,11 +65,11 @@ export default function WhatsAppButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.96 }}
         aria-label="Chat on WhatsApp"
-        className="relative w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center"
-        style={{ boxShadow: "0 12px 28px -6px rgba(37, 211, 102, 0.5)" }}
+        className="relative w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg"
+        style={{ boxShadow: "0 10px 24px -4px rgba(37, 211, 102, 0.4)" }}
       >
         <MessageCircle className="w-6 h-6" />
-        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-15" />
+        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-10" />
       </motion.button>
     </div>
   );
