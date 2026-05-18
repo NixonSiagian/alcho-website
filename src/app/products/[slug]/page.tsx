@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { getProductBySlug, products } from "@/data/products";
 import ProductDetailClient from "./ProductDetailClient";
 

@@ -14,15 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" },
-  }),
-};
+import { FadeIn, ParallaxImage, ParallaxLayer } from "@/components/Parallax";
 
 const timeline = [
   {
@@ -51,9 +43,9 @@ const timeline = [
   },
   {
     year: "2023",
-    title: "8 Products & Growing",
+    title: "30+ Products & Growing",
     description:
-      "The Alcho family grew to 8 signature products, each rooted in a distinct Indonesian culinary tradition. Over 50,000 households trust Alcho monthly.",
+      "The Alcho family grew across pastes, sauces, bouillons and snack seasonings, each rooted in a distinct Indonesian culinary tradition.",
   },
   {
     year: "Today",
@@ -68,49 +60,37 @@ const values = [
     icon: Heart,
     title: "Passion for Flavor",
     description:
-      "Every product we make starts with genuine love for food. We obsess over depth, balance, and authenticity in every batch.",
-    color: "text-rose-500",
-    bg: "bg-rose-50 dark:bg-rose-950/30",
+      "Every product begins with a genuine love of food. We obsess over depth, balance, and authenticity in every batch.",
   },
   {
     icon: Sprout,
     title: "Respect for Nature",
     description:
-      "We source from sustainable farms and use only natural ingredients — no artificial colors, preservatives, or flavor enhancers.",
-    color: "text-green-600",
-    bg: "bg-green-50 dark:bg-green-950/30",
+      "We source from sustainable farms and use only natural ingredients — no artificial colors, preservatives, or enhancers.",
   },
   {
     icon: Globe,
     title: "Heritage & Craft",
     description:
-      "Indonesia's archipelago holds thousands of culinary traditions. We are their stewards, ensuring these flavors are never lost.",
-    color: "text-blue-500",
-    bg: "bg-blue-50 dark:bg-blue-950/30",
+      "Indonesia's archipelago holds thousands of culinary traditions. We are their stewards, ensuring those flavors are never lost.",
   },
   {
     icon: Award,
     title: "Uncompromising Quality",
     description:
       "From sourcing to packaging, we apply rigorous standards. If it doesn't meet the bar, it doesn't carry the Alcho name.",
-    color: "text-gold-600",
-    bg: "bg-amber-50 dark:bg-amber-950/30",
   },
   {
     icon: Users,
     title: "Community First",
     description:
-      "We work directly with local spice farmers, ensuring fair wages and supporting the communities that make our products possible.",
-    color: "text-purple-500",
-    bg: "bg-purple-50 dark:bg-purple-950/30",
+      "We work directly with local spice farmers — fair wages, long partnerships, and the communities behind every harvest.",
   },
   {
     icon: Lightbulb,
     title: "Constant Innovation",
     description:
-      "While rooted in tradition, we embrace creativity. Our R&D team constantly explores new flavor profiles inspired by Indonesia's rich food culture.",
-    color: "text-orange-500",
-    bg: "bg-orange-50 dark:bg-orange-950/30",
+      "While rooted in tradition, we embrace creativity. Our R&D team explores new flavor profiles inspired by the archipelago.",
   },
 ];
 
@@ -118,20 +98,20 @@ const team = [
   {
     name: "Chef Rizal Kusuma",
     role: "Founder & Head of Flavor",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80",
-    bio: "20 years in professional kitchens across Jakarta and Bali, Rizal channels his grandmother's recipes into every Alcho product.",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80",
+    bio: "20 years across professional kitchens in Jakarta and Bali, channeling his grandmother's recipes into every Alcho product.",
   },
   {
     name: "Dewi Hartono",
     role: "Co-Founder & Operations",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-    bio: "With a background in food science, Dewi ensures every jar of Alcho meets the highest safety and quality standards.",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80",
+    bio: "With a background in food science, Dewi safeguards Alcho's quality and safety standards on every line.",
   },
   {
     name: "Bima Prasetyo",
     role: "Head of Sourcing",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-    bio: "Bima travels the archipelago building relationships with local farmers who share Alcho's commitment to quality.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80",
+    bio: "Bima travels the archipelago building relationships with farmers who share Alcho's commitment to craft.",
   },
 ];
 
@@ -139,326 +119,295 @@ export default function AboutPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative pt-36 pb-24 lg:pt-44 lg:pb-32 overflow-hidden bg-hero-deep">
+        <ParallaxImage strength={120} className="absolute inset-0 opacity-25">
           <Image
-            src="https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=1600&q=80"
-            alt="Indonesian spices"
+            src="https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=1800&q=80"
+            alt=""
             fill
             priority
-            className="object-cover opacity-20 dark:opacity-10"
+            className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-cream-50 via-cream-50/90 to-cream-50 dark:from-brown-950 dark:via-brown-950/90 dark:to-brown-950" />
-        </div>
+        </ParallaxImage>
+        <div className="absolute inset-0 bg-gradient-to-b from-brown-950/60 via-transparent to-brown-950" />
+        <div className="absolute inset-0 bg-spice-texture pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <motion.span
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4 px-4 py-1.5 rounded-full bg-brown-100 dark:bg-brown-900 text-brown-600 dark:text-gold-400"
-            >
-              Our Story
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-serif text-5xl sm:text-6xl font-bold text-brown-900 dark:text-cream-50 leading-tight mb-6"
-            >
-              More Than Seasoning —<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brown-600 to-gold-600 dark:from-gold-400 dark:to-gold-300">
-                A Living Heritage.
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn immediate>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-px w-8 bg-gold-400/60" />
+              <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-300">
+                Our Story
               </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-brown-600 dark:text-brown-300 text-xl leading-relaxed"
-            >
+            </div>
+          </FadeIn>
+          <FadeIn immediate delay={0.1}>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-50 leading-[1.05] text-balance">
+              More than seasoning —<br />
+              <span className="text-gold-gradient italic">a living heritage.</span>
+            </h1>
+          </FadeIn>
+          <FadeIn immediate delay={0.2}>
+            <p className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-brown-200">
               Alcho was born in a home kitchen and grew through a simple conviction: the world
               deserves to taste real Indonesian flavor — made with honesty, care, and the best
               ingredients nature provides.
-            </motion.p>
-          </div>
+            </p>
+          </FadeIn>
         </div>
       </section>
 
       {/* ── Brand Story ── */}
-      <section className="py-20 bg-white dark:bg-brown-900">
+      <section className="py-24 md:py-32 bg-cream-50 dark:bg-brown-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-brown-900 dark:text-cream-50 mb-6 leading-tight">
-                It Started with a{" "}
-                <span className="italic text-gold-600 dark:text-gold-400">Grandmother&apos;s Recipe</span>
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            <FadeIn>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="h-px w-8 bg-gold-500/60" />
+                <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-700 dark:text-gold-300">
+                  The Beginning
+                </span>
+              </div>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-brown-900 dark:text-cream-50 leading-[1.15] text-balance">
+                It started with a{" "}
+                <em className="not-italic font-serif italic text-gold-700 dark:text-gold-300">
+                  grandmother's recipe.
+                </em>
               </h2>
-              <div className="space-y-4 text-brown-600 dark:text-brown-300 leading-relaxed">
+              <div className="mt-7 space-y-5 text-brown-700 dark:text-brown-200 leading-relaxed">
                 <p>
                   In the summer of 2015, Chef Rizal Kusuma stood in his Jakarta kitchen trying
                   to recreate the rendang his grandmother made every Lebaran. The markets offered
-                  nothing close — store-bought pastes were pale imitations filled with additives
-                  and artificial flavors.
+                  nothing close — store-bought pastes were pale imitations filled with additives.
                 </p>
                 <p>
                   So he started from scratch. Sourcing fresh galangal from West Java, hand-grinding
                   candlenuts, layering whole spices in the exact proportions his grandmother had
                   taught him. When he brought jars to friends, the response was immediate:
-                  <em className="text-brown-800 dark:text-cream-200"> &ldquo;This is exactly what it&apos;s supposed to taste like.&rdquo;</em>
+                  <em className="text-brown-900 dark:text-cream-100">
+                    {" "}"this is exactly what it's supposed to taste like."
+                  </em>
                 </p>
                 <p>
-                  That validation became a business. Today, Alcho produces 8 signature products,
-                  ships to multiple countries, and is trusted by over 50,000 home cooks and
-                  professional chefs — but the philosophy remains unchanged: <strong className="text-brown-900 dark:text-cream-100">real ingredients,
-                  real recipes, real flavor.</strong>
+                  That validation became a business. Today, Alcho is trusted by tens of thousands
+                  of home cooks and professional chefs — but the philosophy remains unchanged:{" "}
+                  <strong className="text-brown-900 dark:text-cream-50">
+                    real ingredients, real recipes, real flavor.
+                  </strong>
                 </p>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-brown-200/70 dark:bg-brown-800 rounded-2xl overflow-hidden">
                 {[
                   { value: "2015", label: "Founded" },
-                  { value: "8+", label: "Products" },
-                  { value: "50K+", label: "Happy Customers" },
-                  { value: "100%", label: "Natural Ingredients" },
+                  { value: "30+", label: "Products" },
+                  { value: "50K+", label: "Happy Cooks" },
+                  { value: "100%", label: "Natural" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="bg-brown-50 dark:bg-brown-800 rounded-xl p-4 border border-brown-100 dark:border-brown-700"
+                    className="bg-cream-50 dark:bg-brown-900 px-4 py-5 text-center"
                   >
-                    <div className="font-serif text-2xl font-bold text-gold-600 dark:text-gold-400">
+                    <div className="font-serif text-2xl font-semibold text-gold-gradient">
                       {stat.value}
                     </div>
-                    <div className="text-brown-500 dark:text-brown-300 text-sm mt-0.5">
+                    <div className="text-brown-500 dark:text-brown-300 text-[11px] tracking-[0.18em] uppercase mt-1.5">
                       {stat.label}
                     </div>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </FadeIn>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                    <Image
-                      src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=400&q=80"
-                      alt="Spice grinding"
-                      fill
-                      className="object-cover"
-                      sizes="200px"
-                    />
+            <FadeIn delay={0.15}>
+              <div className="relative">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-4">
+                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                      <Image
+                        src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=600&q=80"
+                        alt="Spice grinding"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 300px"
+                      />
+                    </div>
+                    <div className="relative aspect-square rounded-2xl overflow-hidden">
+                      <Image
+                        src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+                        alt="Rendang paste"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 300px"
+                      />
+                    </div>
                   </div>
-                  <div className="relative aspect-square rounded-2xl overflow-hidden">
-                    <Image
-                      src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80"
-                      alt="Rendang paste"
-                      fill
-                      className="object-cover"
-                      sizes="200px"
-                    />
+                  <div className="space-y-4 pt-10">
+                    <div className="relative aspect-square rounded-2xl overflow-hidden">
+                      <Image
+                        src="https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&q=80"
+                        alt="Sambal"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 300px"
+                      />
+                    </div>
+                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                      <Image
+                        src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&q=80"
+                        alt="Cooking"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 300px"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-4 pt-8">
-                  <div className="relative aspect-square rounded-2xl overflow-hidden">
-                    <Image
-                      src="https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=400&q=80"
-                      alt="Sambal"
-                      fill
-                      className="object-cover"
-                      sizes="200px"
-                    />
-                  </div>
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                    <Image
-                      src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80"
-                      alt="Cooking"
-                      fill
-                      className="object-cover"
-                      sizes="200px"
-                    />
+
+                <div className="absolute -bottom-5 -left-5 bg-cream-50 dark:bg-brown-800 rounded-2xl p-4 shadow-luxury border border-cream-200/60 dark:border-brown-700">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gold-soft flex items-center justify-center ring-1 ring-gold-300/50">
+                      <CheckCircle2 className="w-5 h-5 text-brown-900" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-brown-900 dark:text-cream-100 text-sm">No Preservatives</div>
+                      <div className="text-brown-400 text-[11px] tracking-wider uppercase">Certified Natural</div>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 -left-4 bg-white dark:bg-brown-800 rounded-2xl p-4 shadow-lg border border-brown-100 dark:border-brown-700">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-950 flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-brown-800 dark:text-cream-100 text-sm">No Preservatives</div>
-                    <div className="text-brown-400 text-xs">Certified Natural</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
       {/* ── Vision & Mission ── */}
-      <section className="py-20 bg-cream-50 dark:bg-brown-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 md:py-32 bg-cream-100 dark:bg-brown-950 relative overflow-hidden">
+        <ParallaxLayer offset={-60} className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold-soft opacity-20 blur-3xl pointer-events-none">
+          <div />
+        </ParallaxLayer>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Direction"
             title="Vision & Mission"
             subtitle="The north star that guides every jar we produce."
           />
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Vision */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative bg-brown-800 dark:bg-brown-900 rounded-3xl p-8 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-full -translate-y-8 translate-x-8" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gold-500/5 rounded-full translate-y-6 -translate-x-6" />
-              <div className="relative">
-                <span className="text-gold-400 text-xs font-semibold tracking-widest uppercase mb-4 block">
-                  Vision
-                </span>
-                <h3 className="font-serif text-2xl font-bold text-white mb-4 leading-tight">
-                  To be Indonesia&apos;s most loved culinary heritage brand.
-                </h3>
-                <p className="text-brown-300 leading-relaxed text-sm">
-                  We envision a world where Indonesian flavors are as universally celebrated as
-                  French sauces or Japanese umami — where every kitchen, everywhere, has an Alcho
-                  product that connects them to the rich tapestry of the archipelago.
-                </p>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            <FadeIn>
+              <div className="relative h-full bg-hero-deep rounded-[24px] p-8 lg:p-10 overflow-hidden">
+                <div className="absolute inset-0 bg-spice-texture" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
+                <div className="relative">
+                  <span className="text-gold-300 text-[11px] font-semibold tracking-[0.32em] uppercase mb-5 block">
+                    Vision
+                  </span>
+                  <h3 className="font-serif text-2xl md:text-3xl font-semibold text-cream-50 mb-5 leading-tight">
+                    To be Indonesia's most loved culinary heritage brand.
+                  </h3>
+                  <p className="text-brown-200 leading-relaxed text-[15px]">
+                    We envision a world where Indonesian flavors are as universally celebrated as
+                    French sauces or Japanese umami — where every kitchen, everywhere, has an Alcho
+                    product that connects them to the rich tapestry of the archipelago.
+                  </p>
+                </div>
               </div>
-            </motion.div>
+            </FadeIn>
 
-            {/* Mission */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="bg-white dark:bg-brown-800 rounded-3xl p-8 border border-brown-100 dark:border-brown-700"
-            >
-              <span className="text-brown-500 dark:text-gold-400 text-xs font-semibold tracking-widest uppercase mb-4 block">
-                Mission
-              </span>
-              <h3 className="font-serif text-2xl font-bold text-brown-900 dark:text-cream-50 mb-4 leading-tight">
-                Preserve tradition. Elevate the everyday.
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  "Craft seasonings that honor authentic Indonesian recipes",
-                  "Source ingredients responsibly from local farmers",
-                  "Make restaurant-quality flavor accessible to every home cook",
-                  "Educate the world about the depth of Indonesian cuisine",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-brown-600 dark:text-brown-300">
-                    <CheckCircle2 className="w-4 h-4 text-gold-500 mt-0.5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            <FadeIn delay={0.15}>
+              <div className="h-full bg-cream-50 dark:bg-brown-900 rounded-[24px] p-8 lg:p-10 border border-brown-100/70 dark:border-brown-800">
+                <span className="text-gold-700 dark:text-gold-300 text-[11px] font-semibold tracking-[0.32em] uppercase mb-5 block">
+                  Mission
+                </span>
+                <h3 className="font-serif text-2xl md:text-3xl font-semibold text-brown-900 dark:text-cream-50 mb-6 leading-tight">
+                  Preserve tradition. Elevate the everyday.
+                </h3>
+                <ul className="space-y-3.5">
+                  {[
+                    "Craft seasonings that honor authentic Indonesian recipes",
+                    "Source ingredients responsibly from local farmers",
+                    "Make restaurant-quality flavor accessible to every home cook",
+                    "Educate the world about the depth of Indonesian cuisine",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[15px] text-brown-700 dark:text-brown-200 leading-relaxed">
+                      <CheckCircle2 className="w-4 h-4 text-gold-600 dark:text-gold-400 mt-1 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* ── Core Values ── */}
-      <section className="py-20 bg-white dark:bg-brown-900">
+      {/* ── Values ── */}
+      <section className="py-24 md:py-32 bg-cream-50 dark:bg-brown-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="What We Stand For"
-            title="Our Core Values"
-            subtitle="Six principles that shape how we work, what we make, and how we show up in the world."
+            title="Six principles, one philosophy."
+            subtitle="They shape how we work, what we make, and how we show up in the world."
           />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {values.map((v, i) => (
-              <motion.div
-                key={v.title}
-                custom={i}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="group bg-cream-50 dark:bg-brown-800 rounded-2xl p-6 border border-brown-100 dark:border-brown-700 hover:border-gold-300 dark:hover:border-gold-700 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className={`w-12 h-12 rounded-xl ${v.bg} flex items-center justify-center mb-4`}>
-                  <v.icon className={`w-6 h-6 ${v.color}`} />
+              <FadeIn key={v.title} delay={i * 0.07}>
+                <div className="group h-full bg-cream-100/70 dark:bg-brown-900/60 rounded-[20px] p-7 lg:p-8 border border-brown-100/70 dark:border-brown-800 transition-all duration-500 ease-luxury hover:border-gold-300/70 dark:hover:border-gold-700/60 hover:-translate-y-1.5 hover:shadow-luxury">
+                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold-soft text-brown-900 mb-5 ring-1 ring-gold-300/40 group-hover:scale-105 transition-transform duration-500">
+                    <v.icon className="w-5 h-5" />
+                  </span>
+                  <h3 className="font-serif text-xl font-semibold text-brown-900 dark:text-cream-100 mb-3">
+                    {v.title}
+                  </h3>
+                  <p className="text-brown-600 dark:text-brown-300 text-[15px] leading-relaxed">
+                    {v.description}
+                  </p>
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-brown-800 dark:text-cream-100 mb-2">
-                  {v.title}
-                </h3>
-                <p className="text-brown-500 dark:text-brown-300 text-sm leading-relaxed">
-                  {v.description}
-                </p>
-              </motion.div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Timeline ── */}
-      <section className="py-20 bg-cream-50 dark:bg-brown-950">
+      <section className="py-24 md:py-32 bg-cream-100 dark:bg-brown-950 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Our Journey"
-            title="From Kitchen to Country"
+            title="From kitchen to country."
             subtitle="A decade of flavor, growth, and community."
           />
 
           <div className="relative max-w-3xl mx-auto">
-            {/* Vertical line */}
-            <div className="absolute left-[calc(50%-1px)] top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold-300 via-gold-400 to-transparent hidden md:block" />
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-gold-400/60 via-gold-400/30 to-transparent md:-translate-x-1/2" />
 
-            <div className="space-y-10">
+            <div className="space-y-10 md:space-y-12">
               {timeline.map((item, i) => (
-                <motion.div
-                  key={item.year}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  className={`relative flex flex-col md:flex-row gap-6 md:gap-0 ${
+                <FadeIn key={item.year} delay={i * 0.05}>
+                  <div className={`relative pl-12 md:pl-0 md:flex md:items-center md:gap-10 ${
                     i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Content */}
-                  <div
-                    className={`md:w-[45%] bg-white dark:bg-brown-900 rounded-2xl p-6 border border-brown-100 dark:border-brown-700 shadow-sm hover:shadow-md transition-shadow ${
-                      i % 2 === 0 ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
-                    }`}
-                  >
-                    <span className="font-serif text-gold-600 dark:text-gold-400 font-bold text-lg">
-                      {item.year}
-                    </span>
-                    <h3 className="font-serif text-xl font-semibold text-brown-800 dark:text-cream-100 mt-1 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-brown-500 dark:text-brown-300 text-sm leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+                  }`}>
+                    {/* Center dot */}
+                    <span className="absolute left-4 md:left-1/2 top-2 w-3 h-3 rounded-full bg-gold-500 ring-[6px] ring-cream-100 dark:ring-brown-950 -translate-x-1/2 z-10" />
 
-                  {/* Center dot */}
-                  <div className="hidden md:flex absolute left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full bg-gold-400 border-4 border-cream-50 dark:border-brown-950 z-10" />
-                </motion.div>
+                    {/* Content */}
+                    <div className={`md:w-1/2 ${i % 2 === 0 ? "md:pr-10 md:text-right" : "md:pl-10"}`}>
+                      <span className="font-serif text-lg font-semibold text-gold-gradient">
+                        {item.year}
+                      </span>
+                      <h3 className="font-serif text-xl font-semibold text-brown-900 dark:text-cream-50 mt-1 mb-2 leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="text-brown-600 dark:text-brown-300 text-[15px] leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="hidden md:block md:w-1/2" />
+                  </div>
+                </FadeIn>
               ))}
             </div>
           </div>
@@ -466,72 +415,63 @@ export default function AboutPage() {
       </section>
 
       {/* ── Team ── */}
-      <section className="py-20 bg-white dark:bg-brown-900">
+      <section className="py-24 md:py-32 bg-cream-50 dark:bg-brown-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="The People"
-            title="Meet Our Team"
+            title="Meet the team behind every jar."
             subtitle="Passionate individuals united by a love of food and authentic Indonesian flavor."
           />
 
-          <div className="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto">
             {team.map((member, i) => (
-              <motion.div
-                key={member.name}
-                custom={i}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="text-center group"
-              >
-                <div className="relative w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 border-4 border-cream-100 dark:border-brown-800 shadow-md group-hover:border-gold-300 dark:group-hover:border-gold-600 transition-colors duration-300">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                    sizes="128px"
-                  />
+              <FadeIn key={member.name} delay={i * 0.1}>
+                <div className="group text-center">
+                  <div className="relative w-40 h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden mx-auto mb-6 border-[3px] border-cream-200 dark:border-brown-800 shadow-luxury group-hover:border-gold-400/60 transition-all duration-500">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-luxury group-hover:scale-105"
+                      sizes="200px"
+                    />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold text-brown-900 dark:text-cream-50">
+                    {member.name}
+                  </h3>
+                  <p className="text-gold-700 dark:text-gold-300 text-xs font-medium tracking-[0.18em] uppercase mt-1.5 mb-4">
+                    {member.role}
+                  </p>
+                  <p className="text-brown-600 dark:text-brown-300 text-sm leading-relaxed max-w-xs mx-auto">
+                    {member.bio}
+                  </p>
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-brown-800 dark:text-cream-100">
-                  {member.name}
-                </h3>
-                <p className="text-gold-600 dark:text-gold-400 text-sm font-medium mb-3">
-                  {member.role}
-                </p>
-                <p className="text-brown-500 dark:text-brown-300 text-sm leading-relaxed">
-                  {member.bio}
-                </p>
-              </motion.div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-16 bg-brown-800 dark:bg-brown-950">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="font-serif text-3xl font-bold text-white mb-4">
+      <section className="relative py-24 md:py-28 bg-hero-deep overflow-hidden">
+        <div className="absolute inset-0 bg-spice-texture pointer-events-none" />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <FadeIn>
+            <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-300 mb-5 block">
               Taste the Story
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-cream-50 leading-[1.1] mb-5">
+              Every jar carries our heritage.
             </h2>
-            <p className="text-brown-300 mb-8">
-              Every jar of Alcho carries the history, care, and craft you just read about.
+            <p className="text-brown-200 max-w-xl mx-auto leading-relaxed text-base md:text-lg">
+              Discover the seasoning that belongs in your kitchen — crafted with the same care
+              you've just read about.
             </p>
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold-500 hover:bg-gold-400 text-brown-950 font-semibold transition-all duration-200 hover:shadow-xl hover:shadow-gold-500/30 hover:-translate-y-0.5"
-            >
+            <Link href="/products" className="mt-9 inline-flex btn-gold">
               Explore Products
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </motion.div>
+          </FadeIn>
         </div>
       </section>
     </>
