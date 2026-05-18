@@ -66,6 +66,9 @@ const config: Config = {
         "hero-pattern":     "linear-gradient(135deg, #3a1f0d 0%, #6e3f1c 40%, #a96a20 100%)",
         "gold-shimmer":     "linear-gradient(90deg, transparent 0%, #f59e0b33 50%, transparent 100%)",
       },
+      transitionDuration: {
+        "400": "400ms",
+      },
     },
   },
   plugins: [],

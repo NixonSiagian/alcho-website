@@ -12,7 +12,6 @@ import {
   Send,
   CheckCircle2,
 } from "lucide-react";
-import type { Metadata } from "next";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
