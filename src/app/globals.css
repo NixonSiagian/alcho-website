@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,28 +6,43 @@
 
 @layer base {
   :root {
-    --color-brand-dark: #0f0a05;
-    --color-gold-primary: #d4af37;
-    --color-gold-light: #f5d97a;
-    --color-gold-deep: #a86c15;
+    --color-brand-dark: #0d0906;
+    --color-brand-deeper: #160e07;
+    --color-gold-primary: #c9952a;
+    --color-gold-light: #f4db7e;
+    --color-gold-deep: #9e6f18;
+    --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    background-color: #0f0a05;
-    color: #faf3e3;
+    background-color: #0d0906;
+    color: #fcf5e6;
     font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', Georgia, serif;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    font-weight: 600;
+  }
+
+  h1 { line-height: 1.05; }
+  h2 { line-height: 1.12; }
+  h3 { line-height: 1.2; }
+
+  p {
+    line-height: 1.75;
   }
 
   /* Reduced motion support */
@@ -42,28 +57,40 @@
 }
 
 @layer components {
-  /* Gold gradient CTA button */
+  /* Gold gradient CTA button — refined with depth */
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-all duration-400 ease-luxury;
-    background-image: linear-gradient(135deg, #f5d97a 0%, #d4af37 50%, #a86c15 100%);
-    color: #0f0a05;
-    box-shadow: 0 8px 24px -8px rgba(212, 175, 55, 0.4);
+    @apply relative inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-semibold text-sm tracking-wide transition-all duration-500;
+    background: linear-gradient(145deg, #f4db7e 0%, #c9952a 55%, #9e6f18 100%);
+    color: #0d0906;
+    box-shadow:
+      0 8px 24px -6px rgba(201, 149, 42, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn-gold:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 32px -8px rgba(212, 175, 55, 0.55);
+    box-shadow:
+      0 16px 40px -8px rgba(201, 149, 42, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    filter: brightness(1.05);
+  }
+  .btn-gold:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px -4px rgba(201, 149, 42, 0.3);
   }
 
-  /* Ghost button for dark backgrounds */
+  /* Ghost button — refined borders and transitions */
   .btn-ghost-light {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-400 ease-luxury;
-    color: #faf3e3;
-    border: 1px solid rgba(250, 243, 227, 0.2);
+    @apply inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-medium text-sm tracking-wide transition-all duration-500;
+    color: #fcf5e6;
+    border: 1px solid rgba(252, 245, 230, 0.15);
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
   .btn-ghost-light:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    background: rgba(250, 243, 227, 0.04);
+    border-color: rgba(201, 149, 42, 0.4);
+    background: rgba(201, 149, 42, 0.04);
     transform: translateY(-1px);
+    box-shadow: 0 4px 16px -4px rgba(201, 149, 42, 0.1);
   }
 }
 
@@ -72,18 +99,18 @@
     text-wrap: balance;
   }
 
-  /* Gold gradient text */
+  /* Gold gradient text — richer tones */
   .text-gold-gradient {
-    background: linear-gradient(135deg, #f5d97a 0%, #d4af37 50%, #a86c15 100%);
+    background: linear-gradient(135deg, #f4db7e 0%, #c9952a 55%, #9e6f18 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Gold hairline divider */
+  /* Gold hairline divider — more refined */
   .divider-gold {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(201, 149, 42, 0.3) 30%, rgba(201, 149, 42, 0.3) 70%, transparent 100%);
   }
 
   /* Line clamp */
@@ -105,28 +132,34 @@
   .gpu {
     transform: translateZ(0);
     will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* Luxury section spacing */
+  .section-padding {
+    @apply py-32 md:py-40 lg:py-44;
   }
 }
 
-/* Scrollbar */
+/* Scrollbar — subtler */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f0a05;
+  background: #0d0906;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #d4af37 0%, #855414 100%);
+  background: linear-gradient(180deg, #c9952a 0%, #7a5514 100%);
   border-radius: 9999px;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #a86c15 #0f0a05;
+  scrollbar-color: #9e6f18 #0d0906;
 }
 
-/* Selection */
+/* Selection — refined */
 ::selection {
-  background: rgba(212, 175, 55, 0.3);
-  color: #faf3e3;
+  background: rgba(201, 149, 42, 0.25);
+  color: #fcf5e6;
 }
