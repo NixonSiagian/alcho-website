@@ -1,11 +1,6 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
-
+// Providers wrapper — reserved for future context providers
 export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      {children}
-    </ThemeProvider>
-  );
+  return <>{children}</>;
 }

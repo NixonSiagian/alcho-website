@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 
 /**
- * Detects whether the viewport is below the desktop breakpoint OR the user
- * has expressed a preference for reduced motion. Either condition disables
- * heavy parallax effects in favour of static layouts (luxury > flashy).
+ * Detects whether the viewport is below the desktop breakpoint.
+ * Used to disable heavy parallax and simplify animations on mobile.
  */
 export function useIsMobile(breakpoint = 1024): boolean {
   const [isMobile, setIsMobile] = useState(false);
@@ -17,22 +16,15 @@ export function useIsMobile(breakpoint = 1024): boolean {
     const update = () => setIsMobile(mql.matches);
     update();
 
-    // Safari < 14 quirk: addListener fallback
-    if (mql.addEventListener) {
-      mql.addEventListener("change", update);
-      return () => mql.removeEventListener("change", update);
-    } else {
-      mql.addListener(update);
-      return () => mql.removeListener(update);
-    }
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
   }, [breakpoint]);
 
   return isMobile;
 }
 
 /**
- * Honors the OS-level "prefers-reduced-motion" setting so we can disable
- * non-essential animations for users who need them off.
+ * Honors the OS-level "prefers-reduced-motion" setting.
  */
 export function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
@@ -43,22 +35,17 @@ export function usePrefersReducedMotion(): boolean {
     const update = () => setReduced(mql.matches);
     update();
 
-    if (mql.addEventListener) {
-      mql.addEventListener("change", update);
-      return () => mql.removeEventListener("change", update);
-    } else {
-      mql.addListener(update);
-      return () => mql.removeListener(update);
-    }
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
   }, []);
 
   return reduced;
 }
 
 /**
- * Combined helper: returns `true` when parallax should be disabled — either
- * because the user is on a mobile device or has reduced-motion enabled.
- * Use this as the master gate for any heavy scroll-driven animation.
+ * Combined helper: returns `true` when parallax should be disabled.
+ * Either mobile device OR reduced-motion preference.
+ * On mobile: use simple opacity fade + small translateY (20-30px) instead.
  */
 export function useShouldReduceParallax(breakpoint = 1024): boolean {
   const isMobile = useIsMobile(breakpoint);

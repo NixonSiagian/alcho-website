@@ -6,13 +6,10 @@
 
 @layer base {
   :root {
-    --foreground: #2e1d0e;
-    --background: #fdfaf3;
-  }
-
-  .dark {
-    --foreground: #faf3e3;
-    --background: #1a0f06;
+    --color-brand-dark: #0f0a05;
+    --color-gold-primary: #d4af37;
+    --color-gold-light: #f5d97a;
+    --color-gold-deep: #a86c15;
   }
 
   html {
@@ -22,15 +19,18 @@
   }
 
   body {
-    @apply bg-cream-50 dark:bg-brown-950 text-brown-900 dark:text-cream-100;
+    background-color: #0f0a05;
+    color: #faf3e3;
     font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
   }
 
+  /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -42,32 +42,27 @@
 }
 
 @layer components {
-  /* Primary gold CTA button */
+  /* Gold gradient CTA button */
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-brown-950 transition-all duration-400 ease-luxury;
-    background-image: linear-gradient(135deg, #f5d97a 0%, #e1a82b 50%, #a86c15 100%);
-    box-shadow: 0 8px 24px -8px rgba(225, 168, 43, 0.4);
+    @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-all duration-400 ease-luxury;
+    background-image: linear-gradient(135deg, #f5d97a 0%, #d4af37 50%, #a86c15 100%);
+    color: #0f0a05;
+    box-shadow: 0 8px 24px -8px rgba(212, 175, 55, 0.4);
   }
   .btn-gold:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 32px -8px rgba(225, 168, 43, 0.55);
+    box-shadow: 0 14px 32px -8px rgba(212, 175, 55, 0.55);
   }
 
   /* Ghost button for dark backgrounds */
   .btn-ghost-light {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-cream-100 border border-cream-100/25 transition-all duration-400 ease-luxury;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-400 ease-luxury;
+    color: #faf3e3;
+    border: 1px solid rgba(250, 243, 227, 0.2);
   }
   .btn-ghost-light:hover {
-    @apply border-gold-300/60 bg-cream-50/5;
-    transform: translateY(-1px);
-  }
-
-  /* Ghost button for light backgrounds */
-  .btn-ghost-dark {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-brown-900 border border-brown-200 transition-all duration-400 ease-luxury;
-  }
-  .btn-ghost-dark:hover {
-    @apply border-gold-400/60 bg-brown-100/40;
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(250, 243, 227, 0.04);
     transform: translateY(-1px);
   }
 }
@@ -79,7 +74,7 @@
 
   /* Gold gradient text */
   .text-gold-gradient {
-    background: linear-gradient(135deg, #f5d97a 0%, #e1a82b 50%, #a86c15 100%);
+    background: linear-gradient(135deg, #f5d97a 0%, #d4af37 50%, #a86c15 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -88,7 +83,7 @@
   /* Gold hairline divider */
   .divider-gold {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(225, 168, 43, 0.5) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 50%, transparent 100%);
   }
 
   /* Line clamp */
@@ -115,27 +110,23 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-cream-100 dark:bg-brown-950;
+  background: #0f0a05;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #c98a1c 0%, #855420 100%);
+  background: linear-gradient(180deg, #d4af37 0%, #855414 100%);
   border-radius: 9999px;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #a86c15 transparent;
+  scrollbar-color: #a86c15 #0f0a05;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(225, 168, 43, 0.3);
-  color: #2e1d0e;
-}
-.dark ::selection {
-  background: rgba(225, 168, 43, 0.4);
+  background: rgba(212, 175, 55, 0.3);
   color: #faf3e3;
 }

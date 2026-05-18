@@ -32,19 +32,19 @@ function renderContent(content: string) {
 
     if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={i} className="font-serif text-2xl md:text-3xl font-semibold text-brown-900 dark:text-cream-50 mt-12 mb-5 leading-tight">
+        <h2 key={i} className="font-serif text-2xl md:text-3xl font-semibold text-cream-50 mt-12 mb-5 leading-tight">
           {line.slice(3)}
         </h2>
       );
     } else if (line.startsWith("### ")) {
       elements.push(
-        <h3 key={i} className="font-serif text-xl md:text-2xl font-semibold text-brown-800 dark:text-cream-100 mt-8 mb-4 leading-snug">
+        <h3 key={i} className="font-serif text-xl md:text-2xl font-semibold text-cream-100 mt-8 mb-4 leading-snug">
           {line.slice(4)}
         </h3>
       );
     } else if (line.startsWith("**") && line.endsWith("**")) {
       elements.push(
-        <p key={i} className="font-semibold text-brown-900 dark:text-cream-50 mt-5 mb-1 text-[15px]">
+        <p key={i} className="font-semibold text-cream-50 mt-5 mb-1 text-[15px]">
           {line.slice(2, -2)}
         </p>
       );
@@ -58,7 +58,7 @@ function renderContent(content: string) {
       elements.push(
         <ul key={i} className="space-y-2 mb-6 mt-2">
           {listItems.map((item, k) => (
-            <li key={k} className="flex items-start gap-3 text-[15px] leading-relaxed text-brown-700 dark:text-brown-200">
+            <li key={k} className="flex items-start gap-3 text-[15px] leading-relaxed text-brown-300">
               <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gold-500 shrink-0" />
               <span>{item}</span>
             </li>
@@ -71,13 +71,13 @@ function renderContent(content: string) {
       const parts = line.split(/(\*\*[^*]+\*\*|_[^_]+_)/g);
       const formatted = parts.map((part, k) => {
         if (part.startsWith("**") && part.endsWith("**"))
-          return <strong key={k} className="font-semibold text-brown-900 dark:text-cream-50">{part.slice(2, -2)}</strong>;
+          return <strong key={k} className="font-semibold text-cream-50">{part.slice(2, -2)}</strong>;
         if (part.startsWith("_") && part.endsWith("_") && part.length > 2)
-          return <em key={k} className="italic text-brown-800 dark:text-cream-100">{part.slice(1, -1)}</em>;
+          return <em key={k} className="italic text-cream-100">{part.slice(1, -1)}</em>;
         return part;
       });
       elements.push(
-        <p key={i} className="text-brown-700 dark:text-brown-200 leading-[1.8] mb-5 text-[16px]">
+        <p key={i} className="text-brown-300 leading-[1.8] mb-5 text-[16px]">
           {formatted}
         </p>
       );
@@ -93,7 +93,7 @@ export default function BlogDetailClient({ post, related }: Props) {
       {/* ── Hero ── */}
       <section className="relative pt-20 overflow-hidden">
         <div className="relative h-[60vh] min-h-[440px] lg:h-[72vh]">
-          <ParallaxImage strength={120} className="absolute inset-0">
+          <ParallaxImage strength={80} className="absolute inset-0">
             <Image
               src={post.image}
               alt={post.title}
@@ -103,11 +103,10 @@ export default function BlogDetailClient({ post, related }: Props) {
               sizes="100vw"
             />
           </ParallaxImage>
-          <div className="absolute inset-0 bg-gradient-to-t from-brown-950 via-brown-950/60 to-brown-950/40" />
-          <div className="absolute inset-0 bg-vignette" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-brand-dark/30" />
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 pb-12 lg:pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-x-0 bottom-0 pb-12 lg:pb-16 px-5 sm:px-8 lg:px-12">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -118,7 +117,7 @@ export default function BlogDetailClient({ post, related }: Props) {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-50/10 text-cream-50 text-[10px] font-semibold tracking-[0.22em] uppercase border border-cream-50/20"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/10 text-gold-400 text-[10px] font-semibold tracking-[0.22em] uppercase border border-gold-500/20"
                   >
                     <Tag className="w-3 h-3" />
                     {tag}
@@ -128,17 +127,17 @@ export default function BlogDetailClient({ post, related }: Props) {
               <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-semibold text-cream-50 leading-[1.08] text-balance">
                 {post.title}
               </h1>
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-cream-100/70 text-xs tracking-wider uppercase">
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-cream-100/60 text-xs tracking-wider uppercase">
                 <span className="inline-flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5 text-gold-400" />
+                  <User className="w-3.5 h-3.5 text-gold-500" />
                   {post.author}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-gold-400" />
+                  <Calendar className="w-3.5 h-3.5 text-gold-500" />
                   {formatDate(post.date)}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-gold-400" />
+                  <Clock className="w-3.5 h-3.5 text-gold-500" />
                   {post.readTime}
                 </span>
               </div>
@@ -148,29 +147,29 @@ export default function BlogDetailClient({ post, related }: Props) {
       </section>
 
       {/* ── Body ── */}
-      <section className="py-16 lg:py-24 bg-cream-50 dark:bg-brown-950">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 lg:py-24 bg-brand-dark">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-[1fr_300px] gap-12 lg:gap-16">
             <FadeIn>
               <article>
                 {/* Excerpt callout */}
                 <div className="mb-10 pl-5 lg:pl-7 border-l-2 border-gold-500">
-                  <p className="font-serif italic text-lg lg:text-xl leading-relaxed text-brown-800 dark:text-cream-100">
+                  <p className="font-serif italic text-lg lg:text-xl leading-relaxed text-cream-200">
                     {post.excerpt}
                   </p>
                 </div>
 
                 <div className="prose-custom">{renderContent(post.content)}</div>
 
-                <div className="mt-14 pt-10 border-t border-brown-100/70 dark:border-brown-800">
-                  <p className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-700 dark:text-gold-300 mb-4">
+                <div className="mt-14 pt-10 border-t border-brown-800/40">
+                  <p className="text-gold-500 text-[11px] font-semibold tracking-[0.3em] uppercase mb-4">
                     Filed under
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1.5 rounded-full border border-brown-200 dark:border-brown-700 text-brown-700 dark:text-brown-200 text-xs font-medium hover:border-gold-400/60 transition-colors"
+                        className="px-3 py-1.5 rounded-full border border-brown-700/50 text-brown-300 text-xs font-medium hover:border-gold-500/30 transition-colors"
                       >
                         {tag}
                       </span>
@@ -181,7 +180,7 @@ export default function BlogDetailClient({ post, related }: Props) {
                 <div className="mt-8">
                   <Link
                     href="/blog"
-                    className="inline-flex items-center gap-2 text-brown-700 dark:text-brown-300 hover:text-gold-700 dark:hover:text-gold-300 text-sm font-medium transition-colors"
+                    className="inline-flex items-center gap-2 text-brown-400 hover:text-gold-400 text-sm font-medium transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     Back to all recipes
@@ -193,17 +192,17 @@ export default function BlogDetailClient({ post, related }: Props) {
             {/* Sidebar */}
             <aside className="space-y-6">
               <FadeIn delay={0.15}>
-                <div className="bg-cream-100/60 dark:bg-brown-900/60 rounded-2xl p-6 border border-brown-100/70 dark:border-brown-800">
-                  <div className="w-14 h-14 rounded-full bg-gold-soft flex items-center justify-center mb-4 ring-1 ring-gold-300/40 text-2xl">
+                <div className="bg-brand-deeper rounded-2xl p-6 border border-brown-800/40">
+                  <div className="w-14 h-14 rounded-full bg-gold-500/10 flex items-center justify-center mb-4 text-2xl">
                     👨‍🍳
                   </div>
-                  <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-gold-700 dark:text-gold-300 mb-2">
+                  <p className="text-gold-500 text-[10px] font-semibold tracking-[0.22em] uppercase mb-2">
                     The Author
                   </p>
-                  <h3 className="font-serif text-lg font-semibold text-brown-900 dark:text-cream-50 mb-2">
+                  <h3 className="font-serif text-lg font-semibold text-cream-50 mb-2">
                     {post.author}
                   </h3>
-                  <p className="text-brown-600 dark:text-brown-300 text-sm leading-relaxed">
+                  <p className="text-brown-400 text-sm leading-relaxed">
                     Alcho kitchen chef and recipe developer, passionate about bringing authentic
                     Indonesian flavors to every table.
                   </p>
@@ -211,26 +210,18 @@ export default function BlogDetailClient({ post, related }: Props) {
               </FadeIn>
 
               <FadeIn delay={0.25}>
-                <div className="relative bg-hero-deep rounded-2xl p-6 overflow-hidden">
-                  <div className="absolute inset-0 bg-spice-texture" />
+                <div className="relative bg-hero-deep rounded-2xl p-6 overflow-hidden border border-brown-800/30">
                   <div className="relative">
-                    <p className="text-gold-300 text-[10px] font-semibold tracking-[0.22em] uppercase mb-3">
+                    <p className="text-gold-400 text-[10px] font-semibold tracking-[0.22em] uppercase mb-3">
                       Used in this recipe
                     </p>
                     <h3 className="font-serif text-xl font-semibold text-cream-50 mb-3 leading-snug">
                       Browse Alcho Products
                     </h3>
-                    <p className="text-brown-200 text-sm mb-5 leading-relaxed">
+                    <p className="text-brown-300 text-sm mb-5 leading-relaxed">
                       Find the exact seasonings used here and more, in our full collection.
                     </p>
-                    <Link
-                      href="/products"
-                      className="block w-full text-center px-5 py-3 rounded-full text-brown-950 font-semibold text-sm transition-all duration-400 ease-luxury hover:-translate-y-0.5"
-                      style={{
-                        backgroundImage: "linear-gradient(135deg, #f5d97a 0%, #e1a82b 50%, #a86c15 100%)",
-                        boxShadow: "0 12px 30px -10px rgba(225, 168, 43, 0.5)",
-                      }}
-                    >
+                    <Link href="/products" className="block w-full text-center btn-gold">
                       Shop Products
                     </Link>
                   </div>
@@ -243,17 +234,17 @@ export default function BlogDetailClient({ post, related }: Props) {
 
       {/* ── Related ── */}
       {related.length > 0 && (
-        <section className="py-20 lg:py-24 bg-cream-100 dark:bg-brown-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 lg:py-24 bg-brand-deeper">
+          <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
             <FadeIn>
               <div className="flex items-center gap-3 mb-3">
-                <span className="h-px w-8 bg-gold-500/60" />
-                <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-700 dark:text-gold-300">
+                <span className="h-px w-8 bg-gold-500/50" />
+                <span className="text-gold-500 text-[11px] font-semibold tracking-[0.3em] uppercase">
                   Keep Cooking
                 </span>
               </div>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brown-900 dark:text-cream-50 mb-10 leading-tight">
-                More recipes you'll love.
+              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-cream-50 mb-10 leading-tight">
+                More recipes you&apos;ll love.
               </h2>
             </FadeIn>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

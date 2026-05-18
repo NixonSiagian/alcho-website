@@ -26,18 +26,14 @@ export default function ProductDetailClient({ product, related }: Props) {
   return (
     <>
       {/* Breadcrumb */}
-      <div className="pt-24 lg:pt-28 pb-6 bg-cream-50 dark:bg-brown-950 border-b border-brown-100/70 dark:border-brown-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-xs tracking-wider uppercase text-brown-400">
-            <Link href="/" className="hover:text-gold-700 dark:hover:text-gold-300 transition-colors">
-              Home
-            </Link>
-            <span className="text-brown-200 dark:text-brown-700">/</span>
-            <Link href="/products" className="hover:text-gold-700 dark:hover:text-gold-300 transition-colors">
-              Products
-            </Link>
-            <span className="text-brown-200 dark:text-brown-700">/</span>
-            <span className="text-brown-700 dark:text-cream-100 font-medium truncate max-w-[180px] sm:max-w-xs normal-case tracking-normal">
+      <div className="pt-24 lg:pt-28 pb-6 bg-brand-dark border-b border-brown-800/40">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
+          <nav className="flex items-center gap-2 text-xs tracking-wider uppercase text-brown-500">
+            <Link href="/" className="hover:text-gold-400 transition-colors">Home</Link>
+            <span className="text-brown-700">/</span>
+            <Link href="/products" className="hover:text-gold-400 transition-colors">Products</Link>
+            <span className="text-brown-700">/</span>
+            <span className="text-cream-100 font-medium truncate max-w-[180px] sm:max-w-xs normal-case tracking-normal">
               {product.name}
             </span>
           </nav>
@@ -45,8 +41,8 @@ export default function ProductDetailClient({ product, related }: Props) {
       </div>
 
       {/* Main Product Section */}
-      <section className="py-12 lg:py-20 bg-cream-50 dark:bg-brown-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 lg:py-20 bg-brand-dark">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             {/* Image */}
             <motion.div
@@ -55,7 +51,7 @@ export default function ProductDetailClient({ product, related }: Props) {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
-              <div className="relative aspect-square rounded-[28px] overflow-hidden bg-brown-100/40 dark:bg-brown-900 shadow-luxury">
+              <div className="relative aspect-square rounded-[28px] overflow-hidden bg-brown-900 shadow-luxury">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -66,13 +62,7 @@ export default function ProductDetailClient({ product, related }: Props) {
                 />
                 {product.badge && (
                   <div className="absolute top-5 left-5">
-                    <span
-                      className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.18em] uppercase text-brown-950"
-                      style={{
-                        backgroundImage: "linear-gradient(135deg, #f5d97a 0%, #e1a82b 70%, #a86c15 100%)",
-                        boxShadow: "0 8px 22px -6px rgba(225, 168, 43, 0.55)",
-                      }}
-                    >
+                    <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.18em] uppercase btn-gold !shadow-gold-glow">
                       {product.badge}
                     </span>
                   </div>
@@ -80,9 +70,9 @@ export default function ProductDetailClient({ product, related }: Props) {
               </div>
 
               {/* Floating category */}
-              <div className="absolute -bottom-5 left-6 bg-cream-50 dark:bg-brown-900 rounded-2xl px-5 py-3 shadow-luxury border border-cream-200/60 dark:border-brown-700 flex items-center gap-2.5">
-                <Tag className="w-4 h-4 text-gold-600" />
-                <span className="text-brown-800 dark:text-cream-100 text-xs tracking-wider uppercase font-semibold">
+              <div className="absolute -bottom-5 left-6 bg-brand-deeper rounded-2xl px-5 py-3 shadow-luxury border border-brown-800/50 flex items-center gap-2.5">
+                <Tag className="w-4 h-4 text-gold-500" />
+                <span className="text-cream-100 text-xs tracking-wider uppercase font-semibold">
                   {product.category}
                 </span>
               </div>
@@ -95,57 +85,57 @@ export default function ProductDetailClient({ product, related }: Props) {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="lg:pt-2"
             >
-              <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-700 dark:text-gold-300">
+              <span className="text-gold-500 text-[11px] font-semibold tracking-[0.3em] uppercase">
                 Alcho Signature
               </span>
-              <h1 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-brown-900 dark:text-cream-50 leading-[1.1] text-balance">
+              <h1 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-cream-50 leading-[1.1] text-balance">
                 {product.name}
               </h1>
 
-              <p className="mt-5 text-brown-700 dark:text-brown-200 text-base lg:text-lg leading-relaxed">
+              <p className="mt-5 text-brown-300 text-base lg:text-lg leading-relaxed">
                 {product.description}
               </p>
 
               {/* Detail chips */}
               <div className="mt-7 flex flex-wrap gap-3">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-cream-100 dark:bg-brown-900 border border-brown-100/70 dark:border-brown-800">
-                  <Scale className="w-3.5 h-3.5 text-brown-500" />
-                  <span className="text-xs tracking-wider uppercase text-brown-700 dark:text-cream-100 font-semibold">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand-deeper border border-brown-800/50">
+                  <Scale className="w-3.5 h-3.5 text-brown-400" />
+                  <span className="text-xs tracking-wider uppercase text-cream-100 font-semibold">
                     {product.weight}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/40">
-                  <Leaf className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-xs tracking-wider uppercase text-emerald-700 dark:text-emerald-300 font-semibold">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/30 border border-emerald-900/40">
+                  <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-xs tracking-wider uppercase text-emerald-300 font-semibold">
                     No Preservatives
                   </span>
                 </div>
               </div>
 
               {/* How to Use */}
-              <div className="mt-8 bg-gold-50 dark:bg-brown-900/60 border border-gold-200/60 dark:border-gold-700/30 rounded-2xl p-5 lg:p-6">
+              <div className="mt-8 bg-brand-deeper border border-brown-800/40 rounded-2xl p-5 lg:p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <ChefHat className="w-5 h-5 text-gold-700 dark:text-gold-300" />
-                  <h3 className="font-serif text-base font-semibold text-brown-900 dark:text-cream-100">
+                  <ChefHat className="w-5 h-5 text-gold-500" />
+                  <h3 className="font-serif text-base font-semibold text-cream-100">
                     How to Use
                   </h3>
                 </div>
-                <p className="text-brown-700 dark:text-brown-200 text-[15px] leading-relaxed">
+                <p className="text-brown-300 text-[15px] leading-relaxed">
                   {product.usage}
                 </p>
               </div>
 
               {/* Ingredients */}
               <div className="mt-8">
-                <h3 className="font-serif text-base font-semibold text-brown-900 dark:text-cream-100 mb-3 flex items-center gap-2">
-                  <Leaf className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <h3 className="font-serif text-base font-semibold text-cream-100 mb-3 flex items-center gap-2">
+                  <Leaf className="w-4 h-4 text-emerald-400" />
                   Key Ingredients
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.ingredients.map((ing) => (
                     <span
                       key={ing}
-                      className="px-3 py-1.5 rounded-full bg-cream-50 dark:bg-brown-900 border border-brown-100/70 dark:border-brown-800 text-brown-700 dark:text-brown-200 text-xs font-medium hover:border-gold-300/60 dark:hover:border-gold-700/60 transition-colors"
+                      className="px-3 py-1.5 rounded-full bg-brand-deeper border border-brown-800/50 text-brown-300 text-xs font-medium hover:border-gold-500/30 transition-colors"
                     >
                       {ing}
                     </span>
@@ -169,7 +159,7 @@ export default function ProductDetailClient({ product, related }: Props) {
                 </a>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-brown-200 dark:border-brown-700 text-brown-800 dark:text-cream-100 font-medium text-sm hover:border-gold-400/60 hover:bg-cream-100/60 dark:hover:bg-brown-900 transition-all duration-400"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-brown-700/50 text-cream-100 font-medium text-sm hover:border-gold-500/30 transition-all duration-400"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   All Products
@@ -177,20 +167,20 @@ export default function ProductDetailClient({ product, related }: Props) {
               </div>
 
               {/* Trust badges */}
-              <div className="mt-10 pt-8 border-t border-brown-100/70 dark:border-brown-800 grid grid-cols-3 gap-4">
+              <div className="mt-10 pt-8 border-t border-brown-800/40 grid grid-cols-3 gap-4">
                 {[
                   { icon: Leaf, label: "100% Natural", sub: "No additives" },
                   { icon: CheckCircle2, label: "Lab Tested", sub: "Quality certified" },
                   { icon: ShoppingBag, label: "Fast Delivery", sub: "Across Indonesia" },
                 ].map(({ icon: Icon, label, sub }) => (
                   <div key={label} className="text-center">
-                    <div className="w-11 h-11 rounded-full bg-gold-soft flex items-center justify-center mx-auto mb-2.5 ring-1 ring-gold-300/40">
-                      <Icon className="w-5 h-5 text-brown-900" />
+                    <div className="w-11 h-11 rounded-full bg-gold-500/10 flex items-center justify-center mx-auto mb-2.5">
+                      <Icon className="w-5 h-5 text-gold-500" />
                     </div>
-                    <p className="text-brown-900 dark:text-cream-100 text-xs font-semibold tracking-wider uppercase">
+                    <p className="text-cream-100 text-xs font-semibold tracking-wider uppercase">
                       {label}
                     </p>
-                    <p className="text-brown-400 text-[11px] mt-0.5">{sub}</p>
+                    <p className="text-brown-500 text-[11px] mt-0.5">{sub}</p>
                   </div>
                 ))}
               </div>
@@ -201,22 +191,22 @@ export default function ProductDetailClient({ product, related }: Props) {
 
       {/* Related Products */}
       {related.length > 0 && (
-        <section className="py-20 lg:py-24 bg-cream-100 dark:bg-brown-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 lg:py-24 bg-brand-deeper">
+          <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
             <FadeIn>
               <div className="flex items-center gap-3 mb-3">
-                <span className="h-px w-8 bg-gold-500/60" />
-                <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-700 dark:text-gold-300">
-                  You'll Also Love
+                <span className="h-px w-8 bg-gold-500/50" />
+                <span className="text-gold-500 text-[11px] font-semibold tracking-[0.3em] uppercase">
+                  You&apos;ll Also Love
                 </span>
               </div>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-brown-900 dark:text-cream-50 mb-10 leading-tight">
+              <h2 className="font-serif text-3xl md:text-4xl font-semibold text-cream-50 mb-10 leading-tight">
                 More from this collection.
               </h2>
             </FadeIn>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {related.map((p, i) => (
-                <ProductCard key={p.id} product={p} index={i} />
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
           </div>

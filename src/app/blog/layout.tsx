@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Recipes & Stories",
+  title: "Recipes & Blog",
   description:
-    "Step-by-step recipes using Alcho seasonings. Explore Indonesian cooking techniques, tips, and culinary stories from our kitchen.",
+    "Discover authentic Indonesian recipes, cooking tips, and culinary stories from the Alcho kitchen. Cook with confidence using our premium seasonings.",
 };
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
