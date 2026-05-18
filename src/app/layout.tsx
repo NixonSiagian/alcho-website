@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -54,14 +53,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        <Providers>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <WhatsAppButton />
-        </Providers>
+    <html lang="en" className="dark">
+      <body className="bg-brand-dark text-cream-100 font-sans">
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

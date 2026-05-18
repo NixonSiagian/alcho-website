@@ -22,21 +22,21 @@ export default function WhatsAppButton() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="bg-cream-50 dark:bg-brown-900 rounded-2xl shadow-luxury p-4 max-w-xs border border-brown-100 dark:border-brown-800"
+            className="bg-brand-deeper rounded-2xl shadow-luxury p-4 max-w-xs border border-brown-800/40"
           >
             <div className="flex items-start justify-between gap-3 mb-3">
               <div>
-                <p className="font-serif text-base font-semibold text-brown-900 dark:text-cream-100">
+                <p className="font-serif text-base font-semibold text-cream-100">
                   Speak with us
                 </p>
-                <p className="text-brown-500 dark:text-brown-300 text-xs mt-0.5 leading-relaxed">
+                <p className="text-brown-400 text-xs mt-0.5 leading-relaxed">
                   Our team typically replies within minutes.
                 </p>
               </div>
               <button
                 onClick={() => setShowTooltip(false)}
                 aria-label="Dismiss"
-                className="text-brown-400 hover:text-brown-700 dark:hover:text-cream-100 transition-colors"
+                className="text-brown-500 hover:text-cream-100 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>

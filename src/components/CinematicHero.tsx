@@ -8,11 +8,11 @@ import { ArrowRight } from "lucide-react";
 import { useShouldReduceParallax } from "@/hooks/useResponsive";
 
 /* ═══════════════════════════════════════════════════════════════
-   CINEMATIC HERO — Premium, Minimal
-   - Subtle parallax on background (max 80px)
-   - Clean typography hierarchy
-   - Gold gradient accents
-   - Mobile: static background, simple fade-in content
+   CINEMATIC HERO — Primary Parallax Section
+   - Background moves slower than scroll (max 100px)
+   - Content fades out on scroll for cinematic depth
+   - Mobile: static bg, simple fade-in content (no parallax)
+   - Spring-smoothed for silky feel
    ═══════════════════════════════════════════════════════════════ */
 
 const springConfig = { stiffness: 70, damping: 22, mass: 0.5 };
@@ -28,50 +28,52 @@ export default function CinematicHero() {
 
   const smooth = useSpring(scrollYProgress, springConfig);
 
-  // Background: gentle upward drift (max 80px equivalent)
-  const bgY = useTransform(smooth, [0, 1], ["0%", "12%"]);
-  // Content: subtle fade on scroll
-  const contentOpacity = useTransform(smooth, [0, 0.6], [1, 0]);
-  const contentY = useTransform(smooth, [0, 0.6], ["0px", "-30px"]);
+  // Background: gentle upward drift (max ~100px)
+  const bgY = useTransform(smooth, [0, 1], ["0%", "14%"]);
+  // Content: subtle fade and drift on scroll
+  const contentOpacity = useTransform(smooth, [0, 0.5], [1, 0]);
+  const contentY = useTransform(smooth, [0, 0.5], ["0px", "-40px"]);
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100svh] flex items-center overflow-hidden bg-brown-950"
+      className="relative min-h-[100svh] flex items-center overflow-hidden bg-brand-dark"
     >
-      {/* Background Image */}
+      {/* Background Image with Parallax */}
       {reduce ? (
+        // Mobile: static background, just opacity
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1542010589005-d1eacc3918f2?w=1800&q=80"
             alt=""
             fill
             priority
-            className="object-cover opacity-30"
+            className="object-cover opacity-25"
             sizes="100vw"
           />
         </div>
       ) : (
-        <motion.div style={{ y: bgY }} className="absolute inset-[-5%] gpu">
+        // Desktop: parallax background
+        <motion.div style={{ y: bgY }} className="absolute inset-[-8%] gpu">
           <Image
             src="https://images.unsplash.com/photo-1542010589005-d1eacc3918f2?w=1800&q=80"
             alt=""
             fill
             priority
-            className="object-cover opacity-30"
+            className="object-cover opacity-25"
             sizes="100vw"
           />
         </motion.div>
       )}
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-brown-950/95 via-brown-950/70 to-brown-950/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brown-950 via-transparent to-brown-950/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/70 to-brand-dark/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/40" />
 
       {/* Content */}
       <motion.div
         style={reduce ? undefined : { opacity: contentOpacity, y: contentY }}
-        className="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-12 pt-32 pb-24 lg:pt-40 lg:pb-32"
+        className="relative z-10 max-w-6xl mx-auto w-full px-5 sm:px-8 lg:px-12 pt-32 pb-24 lg:pt-40 lg:pb-32"
       >
         <div className="max-w-3xl">
           {/* Eyebrow */}
@@ -79,7 +81,7 @@ export default function CinematicHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-gold-400 text-[11px] font-semibold tracking-[0.3em] uppercase mb-6"
+            className="text-gold-500 text-[11px] font-semibold tracking-[0.3em] uppercase mb-6"
           >
             Premium Indonesian Seasonings
           </motion.p>
@@ -102,7 +104,7 @@ export default function CinematicHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 text-brown-200 text-base sm:text-lg leading-relaxed max-w-xl"
+            className="mt-7 text-brown-300 text-base sm:text-lg leading-relaxed max-w-xl"
           >
             Alcho carries centuries of Indonesian culinary heritage into your kitchen —
             through premium, all-natural sauces, spice blends, and marinades crafted without compromise.
@@ -140,7 +142,7 @@ export default function CinematicHero() {
                 <div className="font-serif text-2xl sm:text-3xl font-semibold text-gold-gradient">
                   {stat.value}
                 </div>
-                <div className="text-brown-400 text-[11px] tracking-[0.2em] uppercase mt-1">
+                <div className="text-brown-500 text-[11px] tracking-[0.2em] uppercase mt-1">
                   {stat.label}
                 </div>
               </div>
@@ -156,10 +158,10 @@ export default function CinematicHero() {
         transition={{ delay: 1.2, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
-        <span className="text-[10px] tracking-[0.3em] uppercase text-cream-100/50">
+        <span className="text-[10px] tracking-[0.3em] uppercase text-cream-100/40">
           Scroll
         </span>
-        <div className="w-px h-8 bg-gradient-to-b from-gold-400/60 to-transparent" />
+        <div className="w-px h-8 bg-gradient-to-b from-gold-500/50 to-transparent" />
       </motion.div>
     </section>
   );

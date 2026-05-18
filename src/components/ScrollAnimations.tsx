@@ -6,8 +6,9 @@ import { useShouldReduceParallax } from "@/hooks/useResponsive";
 
 /* ═══════════════════════════════════════════════════════════════
    SCROLL ANIMATIONS — Minimal, Elegant Reveal System
-   Only fade + translate. No blur, no scale, no heavy effects.
-   Respects reduced motion. Reduced intensity on mobile.
+   - Only fade + translateY (no blur, no scale, no heavy effects)
+   - Respects reduced motion
+   - Reduced intensity on mobile (max 20px translate)
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─── ScrollReveal ─── */
@@ -32,7 +33,8 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const reduce = useShouldReduceParallax();
 
-  const effectiveDistance = reduce ? Math.min(distance, 12) : distance;
+  // Mobile: reduce distance to max 20px for smooth performance
+  const effectiveDistance = reduce ? Math.min(distance, 20) : distance;
   const effectiveDuration = reduce ? 0.4 : duration;
 
   const dirMap = {
@@ -99,7 +101,7 @@ export const staggerItem: Variants = {
   },
 };
 
-/* ─── FadeIn (simple mount animation) ─── */
+/* ─── FadeIn ─── */
 interface FadeInProps {
   children: ReactNode;
   className?: string;
@@ -109,7 +111,7 @@ interface FadeInProps {
 
 export function FadeIn({ children, className, delay = 0, y = 20 }: FadeInProps) {
   const reduce = useShouldReduceParallax();
-  const dist = reduce ? Math.min(y, 10) : y;
+  const dist = reduce ? Math.min(y, 12) : y;
 
   return (
     <motion.div

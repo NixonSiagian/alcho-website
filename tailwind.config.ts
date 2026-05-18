@@ -10,6 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          dark: "#0f0a05",
+          deeper: "#1a0f06",
+          rich: "#2e1d0e",
+        },
         brown: {
           50: "#fbf6ee",
           100: "#f4e8d2",
@@ -38,7 +43,7 @@ const config: Config = {
           200: "#f5d97a",
           300: "#eec24a",
           400: "#e1a82b",
-          500: "#c98a1c",
+          500: "#d4af37",
           600: "#a86c15",
           700: "#855414",
           800: "#684115",
@@ -75,15 +80,15 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        "hero-deep": "linear-gradient(135deg, #1a0f06 0%, #2e1d0e 50%, #4a2f17 100%)",
-        "gold-gradient": "linear-gradient(135deg, #f5d97a 0%, #e1a82b 50%, #a86c15 100%)",
+        "hero-deep": "linear-gradient(135deg, #0f0a05 0%, #1a0f06 50%, #2e1d0e 100%)",
+        "gold-gradient": "linear-gradient(135deg, #f5d97a 0%, #d4af37 50%, #a86c15 100%)",
         "gold-soft": "linear-gradient(135deg, #faedbe 0%, #eec24a 100%)",
       },
       boxShadow: {
-        luxury: "0 20px 60px -20px rgba(46, 29, 14, 0.3)",
-        "luxury-lg": "0 40px 80px -30px rgba(46, 29, 14, 0.4)",
-        "gold-glow": "0 10px 40px -10px rgba(225, 168, 43, 0.35)",
-        "gold-glow-lg": "0 20px 60px -15px rgba(225, 168, 43, 0.5)",
+        luxury: "0 20px 60px -20px rgba(15, 10, 5, 0.4)",
+        "luxury-lg": "0 40px 80px -30px rgba(15, 10, 5, 0.5)",
+        "gold-glow": "0 10px 40px -10px rgba(212, 175, 55, 0.35)",
+        "gold-glow-lg": "0 20px 60px -15px rgba(212, 175, 55, 0.5)",
       },
       transitionTimingFunction: {
         luxury: "cubic-bezier(0.22, 1, 0.36, 1)",
