@@ -1,0 +1,123 @@
+import { Product } from "@/types";
+
+export const products: Product[] = [
+  {
+    id: "1",
+    slug: "signature-rendang-paste",
+    name: "Signature Rendang Paste",
+    category: "Paste & Marinade",
+    shortDescription: "Rich, aromatic rendang paste with 12 authentic Indonesian spices.",
+    description:
+      "Our Signature Rendang Paste brings the depth of traditional Minangkabau cuisine to your kitchen. Crafted from 12 hand-selected spices including galangal, lemongrass, and fresh chilies, this paste delivers an authentic slow-cooked flavor without hours of preparation. Perfect for beef, lamb, or chicken rendang.",
+    ingredients: ["Galangal", "Lemongrass", "Shallots", "Garlic", "Red Chili", "Turmeric", "Coriander", "Cardamom", "Cloves", "Coconut Sugar", "Salt"],
+    usage: "Mix 2 tablespoons with 500g protein. Brown in oil for 5 mins, add coconut milk, simmer 45–60 mins until rich and thick.",
+    weight: "200g",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80",
+    badge: "Best Seller",
+    featured: true,
+  },
+  {
+    id: "2",
+    slug: "golden-turmeric-marinade",
+    name: "Golden Turmeric Marinade",
+    category: "Marinade",
+    shortDescription: "Vibrant turmeric-based marinade for grilled meats and seafood.",
+    description:
+      "Inspired by the golden spice routes of Southeast Asia, this marinade combines fresh turmeric, ginger, and citrus to create a bright, fragrant coating that caramelizes beautifully on the grill. Ideal for chicken satay, grilled fish, or roasted vegetables.",
+    ingredients: ["Fresh Turmeric", "Ginger", "Lime Zest", "Garlic", "Coconut Oil", "Palm Sugar", "Sea Salt", "White Pepper"],
+    usage: "Coat protein generously and marinate for at least 2 hours. Grill or pan-fry over medium-high heat.",
+    weight: "180ml",
+    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600&q=80",
+    badge: "New",
+    featured: true,
+  },
+  {
+    id: "3",
+    slug: "smoky-sambal-sauce",
+    name: "Smoky Sambal Sauce",
+    category: "Sauce",
+    shortDescription: "Bold, smoky chili sauce with a complex depth of flavor.",
+    description:
+      "This smoky sambal is fire-roasted to perfection, blending charred chilies, tomatoes, and shrimp paste into a sauce with irresistible depth. Use it as a condiment, stir-fry base, or dipping sauce. The slow-roasted process gives it a distinctive smokiness that sets it apart from ordinary sambals.",
+    ingredients: ["Roasted Red Chilies", "Smoked Tomatoes", "Shrimp Paste", "Shallots", "Garlic", "Lime Juice", "Coconut Sugar", "Sea Salt"],
+    usage: "Ready to use. Add to stir-fries, use as a dipping sauce, or spread on grilled meats.",
+    weight: "250ml",
+    image: "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&q=80",
+    badge: "Fan Favorite",
+    featured: true,
+  },
+  {
+    id: "4",
+    slug: "heritage-bumbu-rempah",
+    name: "Heritage Bumbu Rempah",
+    category: "Spice Blend",
+    shortDescription: "Traditional Indonesian spice blend for everyday cooking.",
+    description:
+      "A versatile dry spice blend rooted in centuries of Indonesian culinary heritage. Bumbu Rempah is your everyday kitchen companion — add it to soups, stews, rice dishes, or fried foods for an instant boost of authentic flavor. No artificial additives, just pure spice magic.",
+    ingredients: ["Coriander", "Cumin", "Turmeric", "Fennel", "Pepper", "Cardamom", "Nutmeg", "Bay Leaves"],
+    usage: "Add 1–2 teaspoons to oil before cooking. Bloom the spices for 30 seconds before adding other ingredients.",
+    weight: "80g",
+    image: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=600&q=80",
+    featured: false,
+  },
+  {
+    id: "5",
+    slug: "sweet-soy-glaze",
+    name: "Sweet Soy Glaze",
+    category: "Sauce",
+    shortDescription: "Umami-rich sweet soy glaze perfect for glazing and basting.",
+    description:
+      "Our Sweet Soy Glaze is the secret behind perfectly lacquered grilled meats. Brewed from premium Indonesian sweet soy (kecap manis), enriched with spices and a hint of palm sugar, it creates a glossy, sticky coating with deep umami and subtle sweetness. Ideal for ribs, wings, salmon, and vegetables.",
+    ingredients: ["Premium Kecap Manis", "Palm Sugar", "Garlic", "Ginger", "Star Anise", "Sesame Oil", "White Pepper"],
+    usage: "Brush onto protein during the last 5–10 minutes of grilling. Repeat for extra glaze.",
+    weight: "200ml",
+    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+    badge: "New",
+    featured: true,
+  },
+  {
+    id: "6",
+    slug: "nusantara-curry-blend",
+    name: "Nusantara Curry Blend",
+    category: "Spice Blend",
+    shortDescription: "Aromatic archipelago-inspired curry powder for rich, warming dishes.",
+    description:
+      "Drawing from the spice-rich islands of the Indonesian archipelago, the Nusantara Curry Blend is a warm, aromatic powder unlike any standard curry mix. Balanced with toasted coconut and candlenut, it creates curries with a uniquely creamy, nutty depth. Great for lamb, chicken, vegetables, and lentils.",
+    ingredients: ["Toasted Coriander", "Cumin", "Candlenut", "Toasted Coconut", "Turmeric", "Fenugreek", "Chili", "Black Pepper", "Cinnamon"],
+    usage: "Use 1 tablespoon per 400ml coconut milk. Fry paste in oil for 2 minutes before adding liquid.",
+    weight: "90g",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80",
+    featured: false,
+  },
+  {
+    id: "7",
+    slug: "tangy-tamarind-dressing",
+    name: "Tangy Tamarind Dressing",
+    category: "Sauce",
+    shortDescription: "Tangy, sweet tamarind dressing for salads, slaws, and dips.",
+    description:
+      "Bright and punchy, our Tangy Tamarind Dressing captures the signature tartness of tamarind balanced with palm sugar and aromatic spices. Drizzle over fresh salads, use as a dipping sauce for spring rolls, or toss with noodles for a refreshing dish.",
+    ingredients: ["Tamarind Extract", "Palm Sugar", "Fish Sauce", "Garlic", "Shallots", "Lime Juice", "Bird's Eye Chili"],
+    usage: "Shake well before use. Drizzle 2 tablespoons over 2 servings of salad or as a dipping sauce.",
+    weight: "150ml",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80",
+    featured: false,
+  },
+  {
+    id: "8",
+    slug: "aromatic-herb-crust",
+    name: "Aromatic Herb Crust",
+    category: "Spice Blend",
+    shortDescription: "Premium dry rub for roasting and grilling with fragrant Indonesian herbs.",
+    description:
+      "A bold dry rub that transforms any roast into a showstopper. The Aromatic Herb Crust combines fragrant Indonesian herbs like daun salam, pandan-infused salts, and a medley of warm spices to create a perfumed golden crust on any protein or vegetable. Inspired by festive Indonesian roasting traditions.",
+    ingredients: ["Pandan Salt", "Dried Lemongrass", "Galangal Powder", "Salam Leaf", "Roasted Garlic", "Brown Sugar", "Black Pepper"],
+    usage: "Rub generously over surface of protein. Rest for 30 minutes before roasting at 200°C.",
+    weight: "70g",
+    image: "https://images.unsplash.com/photo-1607301406259-dfb186e15de8?w=600&q=80",
+    featured: false,
+  },
+];
+
+export const getFeaturedProducts = () => products.filter((p) => p.featured);
+export const getProductBySlug = (slug: string) => products.find((p) => p.slug === slug);
