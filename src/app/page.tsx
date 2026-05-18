@@ -169,9 +169,9 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════
-          4. HIGHLIGHT — Subtle Parallax (secondary)
+          4. HIGHLIGHT — Cinematic Parallax Statement
       ════════════════════════════════════════ */}
-      <section className="relative h-[70vh] min-h-[500px] max-h-[700px] flex items-center overflow-hidden">
+      <section className="relative h-[75vh] min-h-[550px] max-h-[750px] flex items-center overflow-hidden">
         <ParallaxImage strength={70} className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1547592180-85f173990554?w=1800&q=80"
@@ -182,28 +182,30 @@ export default function HomePage() {
           />
         </ParallaxImage>
 
-        {/* Overlays — layered for depth */}
-        <div className="absolute inset-0 bg-brand-dark/65" />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/30 via-transparent to-brand-dark/20" />
+        {/* Overlays — deep cinematic layering */}
+        <div className="absolute inset-0 bg-brand-dark/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/60 via-brand-dark/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-brand-dark/30" />
+        {/* Subtle warm vignette */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(201, 149, 42, 0.04) 0%, transparent 60%)' }} />
 
         {/* Content */}
         <div className="relative z-10 max-w-6xl mx-auto w-full px-5 sm:px-8 lg:px-12">
           <ScrollReveal direction="up" distance={20} className="max-w-2xl">
-            <span className="text-gold-400 font-serif italic text-lg block mb-5">
-              &ldquo;From our kitchen to yours.&rdquo;
+            <span className="text-gold-400/80 font-serif italic text-lg md:text-xl block mb-6">
+              &ldquo;Where flame meets tradition.&rdquo;
             </span>
-            <h2 className="font-serif text-3xl md:text-5xl lg:text-[54px] font-semibold text-cream-50 leading-[1.08]">
-              Rooted in tradition.
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-[56px] font-semibold text-cream-50 leading-[1.06]">
+              Rooted in fire.
               <br />
-              <span className="text-gold-gradient">Crafted for today.</span>
+              <span className="text-gold-gradient">Refined by time.</span>
             </h2>
-            <p className="mt-7 text-brown-200/90 text-base md:text-lg leading-[1.8] max-w-lg">
-              Every Alcho product carries the depth of Indonesian heritage — spices roasted over
-              open flames, recipes refined across generations, and flavors that transform the everyday.
+            <p className="mt-8 text-brown-200/85 text-base md:text-lg leading-[1.85] max-w-lg">
+              Spices roasted over open flames. Recipes whispered across generations.
+              Flavors that turn the ordinary into something unforgettable.
             </p>
-            <Link href="/products" className="mt-9 inline-flex btn-gold group">
-              Shop Now
+            <Link href="/products" className="mt-10 inline-flex btn-gold group">
+              Explore the Collection
               <ArrowRight className="w-4 h-4 transition-transform duration-400 ease-luxury group-hover:translate-x-1" />
             </Link>
           </ScrollReveal>
@@ -211,32 +213,95 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════
-          5. CTA — Simple & Elegant
+          5. SOCIAL PROOF — Trust & Emotion
       ════════════════════════════════════════ */}
-      <section className="py-32 md:py-40 lg:py-44 bg-brand-dark">
-        <div className="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
+      <section className="relative py-28 md:py-36 lg:py-40 overflow-hidden">
+        {/* Layered depth background */}
+        <div className="absolute inset-0 bg-brand-deeper" />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(201, 149, 42, 0.03) 0%, transparent 55%)' }} />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 80% 80%, rgba(22, 14, 7, 0.8) 0%, transparent 50%)' }} />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
           <ScrollReveal direction="up" distance={16}>
-            <span className="text-gold-500 text-[11px] font-semibold tracking-[0.25em] uppercase mb-6 block">
-              Begin Your Ritual
-            </span>
-            <h2 className="font-serif text-3xl md:text-5xl lg:text-[54px] font-semibold text-cream-50 leading-[1.08] text-balance">
-              Ready to elevate{" "}
-              <span className="text-gold-gradient">your cooking?</span>
-            </h2>
-            <p className="mt-7 text-brown-300 text-base md:text-lg max-w-xl mx-auto leading-[1.8]">
-              Browse our full collection and discover the Alcho seasoning that belongs in your kitchen.
-            </p>
-            <div className="mt-11 flex flex-wrap items-center justify-center gap-4">
-              <Link href="/products" className="btn-gold group">
-                Shop All Products
-                <ArrowRight className="w-4 h-4 transition-transform duration-400 ease-luxury group-hover:translate-x-1" />
-              </Link>
-              <Link href="/contact" className="btn-ghost-light">
-                Get in Touch
-              </Link>
+            <div className="flex items-center justify-center gap-1.5 mb-8">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 text-gold-400 fill-gold-400" />
+              ))}
+            </div>
+            <blockquote className="font-serif text-2xl md:text-3xl lg:text-[34px] font-medium text-cream-100 leading-[1.35] text-balance italic">
+              &ldquo;The moment I opened the jar, I was transported to my grandmother&apos;s kitchen.
+              This is not seasoning — this is memory, bottled.&rdquo;
+            </blockquote>
+            <div className="mt-8 flex flex-col items-center gap-1.5">
+              <span className="text-cream-200 text-sm font-medium tracking-wide">Chef Anindya Pratama</span>
+              <span className="text-brown-500 text-xs tracking-wider uppercase">Jakarta, Indonesia</span>
             </div>
           </ScrollReveal>
         </div>
+      </section>
+
+      {/* Gold divider */}
+      <div className="divider-gold" />
+
+      {/* ════════════════════════════════════════
+          6. CTA — Emotionally Engaging & Premium
+      ════════════════════════════════════════ */}
+      <section className="relative py-36 md:py-44 lg:py-52 overflow-hidden">
+        {/* Multi-layer depth background */}
+        <div className="absolute inset-0 bg-brand-dark" />
+        {/* Central gold ambient glow */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(201, 149, 42, 0.05) 0%, transparent 50%)' }} />
+        {/* Darker edge vignette */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.3) 100%)' }} />
+        {/* Subtle top/bottom gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-deeper/40 via-transparent to-brand-deeper/30" />
+
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-gold-500/20 to-transparent" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
+          <ScrollReveal direction="up" distance={20}>
+            {/* Eyebrow with refined decorative lines */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <span className="h-px w-10 bg-gradient-to-r from-transparent to-gold-500/40" />
+              <span className="text-gold-500 text-[11px] font-semibold tracking-[0.3em] uppercase">
+                Your Kitchen Awaits
+              </span>
+              <span className="h-px w-10 bg-gradient-to-l from-transparent to-gold-500/40" />
+            </div>
+
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-[56px] font-semibold text-cream-50 leading-[1.06] text-balance">
+              The flavor you&apos;ve been
+              <br className="hidden md:block" />
+              {" "}<span className="text-gold-gradient">searching for.</span>
+            </h2>
+
+            <p className="mt-8 text-brown-300 text-[15px] md:text-lg max-w-xl mx-auto leading-[1.85]">
+              One jar. Generations of mastery. Discover why chefs and home cooks
+              across Indonesia trust Alcho to elevate every dish.
+            </p>
+
+            {/* CTA Buttons — premium spacing & styling */}
+            <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-6">
+              <Link href="/products" className="btn-gold-elevated group">
+                Shop the Collection
+                <ArrowRight className="w-4 h-4 transition-transform duration-400 ease-luxury group-hover:translate-x-1.5" />
+              </Link>
+              <Link href="/contact" className="btn-ghost-elevated">
+                Speak with Us
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-60 transition-all duration-400 ease-luxury group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
+
+            {/* Subtle trust indicator */}
+            <p className="mt-12 text-brown-600 text-xs tracking-wider uppercase">
+              Free shipping on orders over Rp 250.000
+            </p>
+          </ScrollReveal>
+        </div>
+
+        {/* Bottom decorative line */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-t from-transparent via-gold-500/15 to-transparent" />
       </section>
     </>
   );
