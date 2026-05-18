@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ChefHat, Instagram, Facebook, Twitter, Mail, Phone, MapPin } from "lucide-react";
 
