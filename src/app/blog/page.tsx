@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search, BookOpen } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
@@ -68,10 +69,12 @@ export default function BlogPage() {
               className="group grid lg:grid-cols-2 gap-8 items-center bg-cream-50 dark:bg-brown-800 rounded-3xl overflow-hidden border border-brown-100 dark:border-brown-700 hover:border-gold-300 dark:hover:border-gold-700 hover:shadow-xl transition-all duration-400 p-6 lg:p-0"
             >
               <div className="relative aspect-video lg:aspect-auto lg:h-80 rounded-2xl lg:rounded-none overflow-hidden">
-                <img
+                <Image
                   src={blogPosts[0].image}
                   alt={blogPosts[0].title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
               <div className="lg:py-10 lg:pr-10 lg:pl-6">
