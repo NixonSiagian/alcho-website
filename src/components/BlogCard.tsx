@@ -1,10 +1,12 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { BlogPost } from "@/types";
+import { useShouldReduceParallax } from "@/hooks/useResponsive";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -12,41 +14,65 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post, index = 0 }: BlogCardProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: 0.7,
-        delay: Math.min(index * 0.07, 0.35),
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      <Link href={`/blog/${post.slug}`} className="group block h-full">
-        <article className="relative h-full bg-cream-50 dark:bg-brown-900/60 rounded-[20px] overflow-hidden border border-brown-100/70 dark:border-brown-800 transition-all duration-500 ease-luxury hover:-translate-y-1.5 hover:shadow-luxury hover:border-gold-300/70 dark:hover:border-gold-700/60">
+  const cardRef = useRef<HTMLDivElement>(null);
+  const reduce = useShouldReduceParallax();
 
-          {/* Image */}
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"],
+  });
+
+  const smooth = useSpring(scrollYProgress, { stiffness: 80, damping: 24, mass: 0.4 });
+
+  // Subtle parallax on the image
+  const imageY = useTransform(smooth, [0, 1], [12, -12]);
+
+  return (
+    <div ref={cardRef}>
+      <Link href={`/blog/${post.slug}`} className="group block h-full">
+        <article className="relative h-full bg-cream-50 dark:bg-brown-900/60 rounded-[20px] overflow-hidden border border-brown-100/70 dark:border-brown-800 transition-all duration-600 ease-luxury hover:-translate-y-2 hover:shadow-luxury hover:border-gold-300/70 dark:hover:border-gold-700/60 card-glow">
+
+          {/* Image with subtle parallax */}
           <div className="relative overflow-hidden aspect-[16/10]">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover transition-transform duration-[900ms] ease-luxury group-hover:scale-[1.06]"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-brown-950/45 via-transparent to-transparent" />
-            <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
+            {reduce ? (
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover transition-transform duration-[900ms] ease-luxury group-hover:scale-[1.05]"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            ) : (
+              <motion.div
+                style={{ y: imageY }}
+                className="absolute inset-[-6%] gpu"
+              >
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-[900ms] ease-luxury group-hover:scale-[1.05]"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </motion.div>
+            )}
+
+            <div className="absolute inset-0 bg-gradient-to-t from-brown-950/45 via-transparent to-transparent pointer-events-none" />
+
+            {/* Tags */}
+            <div className="absolute top-4 left-4 flex flex-wrap gap-1.5 z-[2]">
               {post.tags.slice(0, 1).map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full bg-cream-50/95 text-brown-900 text-[10px] font-semibold tracking-[0.18em] uppercase"
+                  className="px-3 py-1 rounded-full bg-cream-50/95 text-brown-900 text-[10px] font-semibold tracking-[0.18em] uppercase shadow-sm"
                 >
                   {tag}
                 </span>
               ))}
             </div>
-            <span className="absolute bottom-4 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-brown-950/70 text-cream-100 text-[10px] tracking-wider uppercase">
+
+            {/* Read time */}
+            <span className="absolute bottom-4 right-4 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-brown-950/70 text-cream-100 text-[10px] tracking-wider uppercase z-[2]">
               <Clock className="w-3 h-3" />
               {post.readTime}
             </span>
@@ -73,6 +99,6 @@ export default function BlogCard({ post, index = 0 }: BlogCardProps) {
           </div>
         </article>
       </Link>
-    </motion.div>
+    </div>
   );
 }
