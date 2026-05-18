@@ -1,174 +1,215 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Search, BookOpen } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, X, ArrowUpRight, Clock } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
+import { FadeIn } from "@/components/Parallax";
 import { blogPosts } from "@/data/blog";
-
-const allTags = ["All", ...Array.from(new Set(blogPosts.flatMap((p) => p.tags)))];
 
 export default function BlogPage() {
   const [activeTag, setActiveTag] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filtered = blogPosts.filter((p) => {
-    const matchesTag = activeTag === "All" || p.tags.includes(activeTag);
-    const matchesSearch =
-      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTag && matchesSearch;
-  });
+  const allTags = useMemo(
+    () => ["All", ...Array.from(new Set(blogPosts.flatMap((p) => p.tags)))],
+    []
+  );
+
+  const filtered = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    return blogPosts.filter((p) => {
+      const matchesTag = activeTag === "All" || p.tags.includes(activeTag);
+      const matchesSearch =
+        !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.excerpt.toLowerCase().includes(q);
+      return matchesTag && matchesSearch;
+    });
+  }, [activeTag, searchQuery]);
+
+  const featured = blogPosts[0];
 
   return (
     <>
       {/* ── Hero ── */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-brown-900 to-brown-800 dark:from-brown-950 dark:to-brown-900 overflow-hidden relative">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-20 w-48 h-48 rounded-full bg-gold-400 blur-3xl" />
-          <div className="absolute bottom-0 left-20 w-40 h-40 rounded-full bg-brown-400 blur-2xl" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4 px-4 py-1.5 rounded-full bg-gold-500/20 border border-gold-500/30 text-gold-300"
-          >
-            Recipes & Stories
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4"
-          >
-            From the Alcho Kitchen
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-brown-200 text-lg max-w-xl mx-auto"
-          >
-            Step-by-step recipes, cooking tips, and culinary stories — all featuring Alcho
-            seasonings so you can cook with confidence and creativity.
-          </motion.p>
+      <section className="relative pt-36 pb-24 lg:pt-40 lg:pb-28 bg-hero-deep overflow-hidden">
+        <div className="absolute inset-0 bg-spice-texture pointer-events-none" />
+        <div className="absolute -top-20 right-10 w-72 h-72 rounded-full bg-gold-500/10 blur-3xl" />
+        <div className="absolute bottom-0 left-10 w-80 h-80 rounded-full bg-brown-700/30 blur-3xl" />
+
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <FadeIn immediate>
+            <div className="flex items-center gap-3 mb-6 justify-center">
+              <span className="h-px w-8 bg-gold-400/60" />
+              <span className="text-[11px] font-semibold tracking-[0.32em] uppercase text-gold-300">
+                Recipes & Stories
+              </span>
+              <span className="h-px w-8 bg-gold-400/60" />
+            </div>
+          </FadeIn>
+          <FadeIn immediate delay={0.1}>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-cream-50 leading-[1.05] text-balance">
+              From the <span className="text-gold-gradient italic">Alcho</span> kitchen.
+            </h1>
+          </FadeIn>
+          <FadeIn immediate delay={0.2}>
+            <p className="mt-7 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-brown-200">
+              Step-by-step recipes, cooking tips, and culinary stories — each crafted around our
+              seasonings so you can cook with confidence and creativity.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
       {/* ── Featured Post ── */}
-      {blogPosts[0] && (
-        <section className="py-12 bg-white dark:bg-brown-900">
+      {featured && (
+        <section className="py-16 lg:py-20 bg-cream-50 dark:bg-brown-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <FadeIn>
               <Link
-                href={`/blog/${blogPosts[0].slug}`}
-                className="group grid lg:grid-cols-2 gap-8 items-center bg-cream-50 dark:bg-brown-800 rounded-3xl overflow-hidden border border-brown-100 dark:border-brown-700 hover:border-gold-300 dark:hover:border-gold-700 hover:shadow-xl transition-all duration-400 p-6 lg:p-0"
+                href={`/blog/${featured.slug}`}
+                className="group grid lg:grid-cols-2 items-stretch bg-cream-100/60 dark:bg-brown-900/60 rounded-[28px] overflow-hidden border border-brown-100/70 dark:border-brown-800 hover:border-gold-300/70 dark:hover:border-gold-700/60 transition-all duration-500 ease-luxury hover:shadow-luxury"
               >
-                <div className="relative aspect-video lg:aspect-auto lg:h-80 rounded-2xl lg:rounded-none overflow-hidden">
+                <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[420px] overflow-hidden">
                   <Image
-                    src={blogPosts[0].image}
-                    alt={blogPosts[0].title}
+                    src={featured.image}
+                    alt={featured.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover transition-transform duration-[900ms] ease-luxury group-hover:scale-[1.05]"
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brown-950/55 via-transparent to-transparent" />
                 </div>
-                <div className="lg:py-10 lg:pr-10 lg:pl-6">
-                  <span className="inline-block px-3 py-1 rounded-full bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-300 text-xs font-semibold mb-4">
-                    ✨ Featured Recipe
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <span className="inline-flex items-center self-start gap-2 px-3 py-1 rounded-full bg-gold-soft text-brown-900 text-[10px] font-semibold tracking-[0.22em] uppercase ring-1 ring-gold-300/40">
+                    Featured Recipe
                   </span>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-brown-900 dark:text-cream-50 mb-3 leading-tight group-hover:text-brown-700 dark:group-hover:text-gold-300 transition-colors">
-                    {blogPosts[0].title}
+                  <h2 className="mt-5 font-serif text-3xl lg:text-4xl font-semibold text-brown-900 dark:text-cream-50 leading-[1.15] text-balance group-hover:text-gold-700 dark:group-hover:text-gold-300 transition-colors duration-400">
+                    {featured.title}
                   </h2>
-                  <p className="text-brown-500 dark:text-brown-300 leading-relaxed mb-6 line-clamp-3">
-                    {blogPosts[0].excerpt}
+                  <p className="mt-4 text-brown-600 dark:text-brown-300 leading-relaxed line-clamp-3">
+                    {featured.excerpt}
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-brown-400">
-                    <span>{blogPosts[0].author}</span>
-                    <span>·</span>
-                    <span>{blogPosts[0].readTime}</span>
+                  <div className="mt-7 flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-xs tracking-wider uppercase text-brown-400">
+                      <span>{featured.author}</span>
+                      <span className="w-1 h-1 rounded-full bg-brown-300" />
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {featured.readTime}
+                      </span>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-gold-700 dark:text-gold-300 group-hover:gap-2.5 transition-all">
+                      Read
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </FadeIn>
           </div>
         </section>
       )}
 
-      {/* ── Filters ── */}
-      <section className="sticky top-16 lg:top-20 z-30 bg-white/95 dark:bg-brown-900/95 backdrop-blur-md border-b border-brown-100 dark:border-brown-800 shadow-sm">
+      {/* ── Filter bar ── */}
+      <section className="sticky top-16 lg:top-20 z-30 bg-cream-50/85 dark:bg-brown-950/85 backdrop-blur-sm border-b border-brown-100/70 dark:border-brown-800/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <div className="flex flex-wrap gap-2">
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setActiveTag(tag)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                    activeTag === tag
-                      ? "bg-brown-800 dark:bg-brown-600 text-white shadow-sm"
-                      : "bg-brown-100 dark:bg-brown-800 text-brown-600 dark:text-brown-200 hover:bg-brown-200 dark:hover:bg-brown-700"
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
+          <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+            <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 lg:flex-wrap lg:overflow-visible lg:mx-0 lg:px-0 scrollbar-hide">
+              {allTags.map((tag) => {
+                const active = activeTag === tag;
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => setActiveTag(tag)}
+                    className={`shrink-0 px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-400 ease-luxury border ${
+                      active
+                        ? "bg-brown-900 dark:bg-gold-500 text-cream-50 dark:text-brown-950 border-brown-900 dark:border-gold-500 shadow-sm"
+                        : "bg-cream-100/60 dark:bg-brown-900/60 text-brown-700 dark:text-brown-200 border-brown-100 dark:border-brown-800 hover:border-gold-400/60 hover:text-gold-700 dark:hover:text-gold-300"
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
             </div>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brown-400" />
+
+            <div className="relative shrink-0 lg:w-72">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brown-400" />
               <input
                 type="text"
-                placeholder="Search recipes..."
+                placeholder="Search recipes…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-4 py-2 rounded-full bg-brown-50 dark:bg-brown-800 border border-brown-200 dark:border-brown-700 text-sm text-brown-800 dark:text-cream-100 placeholder-brown-400 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent w-full sm:w-56 transition-all"
+                className="w-full pl-10 pr-10 py-2.5 rounded-full bg-cream-100/70 dark:bg-brown-900/70 border border-brown-100 dark:border-brown-800 text-sm text-brown-800 dark:text-cream-100 placeholder-brown-400 focus:outline-none focus:ring-2 focus:ring-gold-400/40 focus:border-gold-400/50 transition-all"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-brown-400 hover:text-brown-700 hover:bg-brown-100 dark:hover:bg-brown-800 transition-colors"
+                  aria-label="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Grid ── */}
-      <section className="py-16 bg-cream-50 dark:bg-brown-950 min-h-[40vh]">
+      <section className="py-16 lg:py-20 bg-cream-50 dark:bg-brown-950 min-h-[50vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 mb-8 text-brown-500 dark:text-brown-300 text-sm">
-            <BookOpen className="w-4 h-4" />
-            <span>
-              <strong className="text-brown-800 dark:text-cream-100">{filtered.length}</strong>{" "}
+          <div className="mb-10 flex items-center justify-between">
+            <p className="text-brown-500 dark:text-brown-300 text-sm">
+              <span className="font-semibold text-brown-900 dark:text-cream-50">{filtered.length}</span>{" "}
               {filtered.length === 1 ? "recipe" : "recipes"} found
-            </span>
+            </p>
           </div>
 
-          {filtered.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((post, i) => (
-                <BlogCard key={post.id} post={post} index={i} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20">
-              <div className="text-6xl mb-4">🍽️</div>
-              <h3 className="font-serif text-xl font-semibold text-brown-800 dark:text-cream-100 mb-2">
-                No recipes found
-              </h3>
-              <p className="text-brown-500 dark:text-brown-300 mb-6">
-                Try adjusting your search or filter.
-              </p>
-              <button
-                onClick={() => { setActiveTag("All"); setSearchQuery(""); }}
-                className="px-6 py-2.5 rounded-full bg-brown-800 text-white text-sm font-medium hover:bg-brown-700 transition-colors"
+          <AnimatePresence mode="wait">
+            {filtered.length > 0 ? (
+              <motion.div
+                key={activeTag + searchQuery}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35 }}
+                className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
               >
-                Clear Filters
-              </button>
-            </div>
-          )}
+                {filtered.map((post, i) => (
+                  <BlogCard key={post.id} post={post} index={i} />
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center py-20"
+              >
+                <div className="w-16 h-16 rounded-full bg-cream-100 dark:bg-brown-900 mx-auto mb-5 flex items-center justify-center">
+                  <Search className="w-6 h-6 text-brown-400" />
+                </div>
+                <h3 className="font-serif text-2xl font-semibold text-brown-900 dark:text-cream-50 mb-2">
+                  No recipes match
+                </h3>
+                <p className="text-brown-500 dark:text-brown-300 mb-7">
+                  Try adjusting your filters or search.
+                </p>
+                <button
+                  onClick={() => { setActiveTag("All"); setSearchQuery(""); }}
+                  className="btn-gold"
+                >
+                  Clear filters
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
     </>

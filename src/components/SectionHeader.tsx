@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { FadeIn } from "./Parallax";
 
 interface SectionHeaderProps {
   eyebrow?: string;
@@ -18,40 +18,36 @@ export default function SectionHeader({
   light = false,
 }: SectionHeaderProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className={`mb-12 ${centered ? "text-center" : ""}`}
-    >
+    <FadeIn className={`mb-14 lg:mb-16 ${centered ? "text-center" : ""}`}>
       {eyebrow && (
-        <span
-          className={`inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-3 px-4 py-1.5 rounded-full ${
-            light
-              ? "bg-white/20 text-white/90"
-              : "bg-brown-100 dark:bg-brown-900 text-brown-600 dark:text-gold-400"
-          }`}
-        >
-          {eyebrow}
-        </span>
+        <div className={`flex items-center gap-3 mb-5 ${centered ? "justify-center" : ""}`}>
+          <span className={`h-px w-8 ${light ? "bg-gold-400/60" : "bg-gold-500/60"}`} />
+          <span
+            className={`text-[11px] font-semibold tracking-[0.32em] uppercase ${
+              light ? "text-gold-300" : "text-gold-700 dark:text-gold-300"
+            }`}
+          >
+            {eyebrow}
+          </span>
+          <span className={`h-px w-8 ${light ? "bg-gold-400/60" : "bg-gold-500/60"}`} />
+        </div>
       )}
       <h2
-        className={`font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-tight ${
-          light ? "text-white" : "text-brown-900 dark:text-cream-50"
+        className={`font-serif text-3xl md:text-4xl lg:text-[44px] font-semibold leading-[1.15] text-balance ${
+          light ? "text-cream-50" : "text-brown-900 dark:text-cream-50"
         }`}
       >
         {title}
       </h2>
       {subtitle && (
         <p
-          className={`mt-4 text-lg max-w-2xl leading-relaxed ${centered ? "mx-auto" : ""} ${
-            light ? "text-brown-200" : "text-brown-500 dark:text-brown-300"
+          className={`mt-5 text-base md:text-lg max-w-2xl leading-relaxed ${centered ? "mx-auto" : ""} ${
+            light ? "text-brown-200" : "text-brown-600 dark:text-brown-300"
           }`}
         >
           {subtitle}
         </p>
       )}
-    </motion.div>
+    </FadeIn>
   );
 }
