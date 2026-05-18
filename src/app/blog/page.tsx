@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Search, BookOpen } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
@@ -61,39 +62,42 @@ export default function BlogPage() {
       {blogPosts[0] && (
         <section className="py-12 bg-white dark:bg-brown-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.a
-              href={`/blog/${blogPosts[0].slug}`}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="group grid lg:grid-cols-2 gap-8 items-center bg-cream-50 dark:bg-brown-800 rounded-3xl overflow-hidden border border-brown-100 dark:border-brown-700 hover:border-gold-300 dark:hover:border-gold-700 hover:shadow-xl transition-all duration-400 p-6 lg:p-0"
             >
-              <div className="relative aspect-video lg:aspect-auto lg:h-80 rounded-2xl lg:rounded-none overflow-hidden">
-                <Image
-                  src={blogPosts[0].image}
-                  alt={blogPosts[0].title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="lg:py-10 lg:pr-10 lg:pl-6">
-                <span className="inline-block px-3 py-1 rounded-full bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-300 text-xs font-semibold mb-4">
-                  ✨ Featured Recipe
-                </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-brown-900 dark:text-cream-50 mb-3 leading-tight group-hover:text-brown-700 dark:group-hover:text-gold-300 transition-colors">
-                  {blogPosts[0].title}
-                </h2>
-                <p className="text-brown-500 dark:text-brown-300 leading-relaxed mb-6 line-clamp-3">
-                  {blogPosts[0].excerpt}
-                </p>
-                <div className="flex items-center gap-4 text-sm text-brown-400">
-                  <span>{blogPosts[0].author}</span>
-                  <span>·</span>
-                  <span>{blogPosts[0].readTime}</span>
+              <Link
+                href={`/blog/${blogPosts[0].slug}`}
+                className="group grid lg:grid-cols-2 gap-8 items-center bg-cream-50 dark:bg-brown-800 rounded-3xl overflow-hidden border border-brown-100 dark:border-brown-700 hover:border-gold-300 dark:hover:border-gold-700 hover:shadow-xl transition-all duration-400 p-6 lg:p-0"
+              >
+                <div className="relative aspect-video lg:aspect-auto lg:h-80 rounded-2xl lg:rounded-none overflow-hidden">
+                  <Image
+                    src={blogPosts[0].image}
+                    alt={blogPosts[0].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
-              </div>
-            </motion.a>
+                <div className="lg:py-10 lg:pr-10 lg:pl-6">
+                  <span className="inline-block px-3 py-1 rounded-full bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-300 text-xs font-semibold mb-4">
+                    ✨ Featured Recipe
+                  </span>
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-brown-900 dark:text-cream-50 mb-3 leading-tight group-hover:text-brown-700 dark:group-hover:text-gold-300 transition-colors">
+                    {blogPosts[0].title}
+                  </h2>
+                  <p className="text-brown-500 dark:text-brown-300 leading-relaxed mb-6 line-clamp-3">
+                    {blogPosts[0].excerpt}
+                  </p>
+                  <div className="flex items-center gap-4 text-sm text-brown-400">
+                    <span>{blogPosts[0].author}</span>
+                    <span>·</span>
+                    <span>{blogPosts[0].readTime}</span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </section>
       )}

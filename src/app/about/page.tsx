@@ -14,7 +14,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
-import type { Metadata } from "next";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
